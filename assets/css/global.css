@@ -820,7 +820,7 @@ ul {
   color: var(--color-text-muted);
 }
 
-/* Upload zone (UI only) */
+/* Upload zone (e.g. provider license files) */
 .upload-zone {
   border: 2px dashed var(--color-border);
   border-radius: var(--radius-md);
@@ -834,6 +834,11 @@ ul {
 }
 
 .upload-zone:hover {
+  border-color: var(--color-primary);
+  background: var(--color-primary-soft);
+}
+
+.upload-zone--drag {
   border-color: var(--color-primary);
   background: var(--color-primary-soft);
 }

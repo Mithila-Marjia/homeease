@@ -83,11 +83,28 @@
             />
           </div>
           <div class="field">
-            <span id="docs-label">Licenses &amp; insurance (PDF)</span>
-            <div class="upload-zone" role="button" tabindex="0" aria-labelledby="docs-label">
-              Drag files here or click to upload
-              <div style="margin-top: 0.5rem; font-size: 0.75rem">UI preview only — no files are stored.</div>
+            <label id="docs-label" for="providerLicenseFiles">Licenses &amp; insurance (PDF or images)</label>
+            <p style="margin: 0 0 0.5rem; font-size: 0.8125rem; color: var(--color-text-muted)">
+              Up to 5 files, 10 MB each. Stored securely after you register.
+            </p>
+            <input
+              class="sr-only"
+              type="file"
+              id="providerLicenseFiles"
+              name="license_files"
+              accept=".pdf,application/pdf,image/jpeg,image/png,image/webp"
+              multiple
+            />
+            <div
+              class="upload-zone"
+              data-license-upload-zone
+              role="button"
+              tabindex="0"
+              aria-labelledby="docs-label"
+            >
+              Click or drag files here to upload
             </div>
+            <p data-license-file-list style="margin: 0.5rem 0 0; font-size: 0.8125rem; color: var(--color-text-muted)"></p>
           </div>
           <div class="field">
             <label for="password">Password</label>

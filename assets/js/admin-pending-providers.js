@@ -29,7 +29,7 @@
   async function loadPending(sb) {
     var res = await sb
       .from("profiles")
-      .select("id, email, full_name, phone, experience_years, primary_category_id, provider_status")
+      .select("id, email, full_name, phone, experience_years, primary_category_id, provider_status, provider_license_files")
       .eq("role", "provider")
       .eq("provider_status", "pending")
       .order("created_at", { ascending: true });
@@ -47,7 +47,7 @@
     if (!rows.length) {
       var tr = document.createElement("tr");
       tr.innerHTML =
-        '<td colspan="5" style="padding:1rem; color: var(--color-text-muted)">No pending provider applications.</td>';
+        '<td colspan="4" style="padding:1rem; color: var(--color-text-muted)">No pending provider applications.</td>';
       tbody.appendChild(tr);
       return;
     }
@@ -55,6 +55,27 @@
     rows.forEach(function (p) {
       var cat = p.primary_category_id && catMap[p.primary_category_id];
       var catLabel = cat ? cat.name : "—";
+      var files = p.provider_license_files;
+      var docButtons = "";
+      if (Array.isArray(files) && files.length) {
+        files.forEach(function (f, idx) {
+          var path = typeof f === "string" ? f : f && f.path;
+          var lbl =
+            typeof f === "object" && f && f.name
+              ? String(f.name).slice(0, 28)
+              : "Document " + (idx + 1);
+          if (!path) return;
+          docButtons +=
+            '<button type="button" class="btn btn--ghost js-license-doc" data-path="' +
+            escapeHtml(path) +
+            '" style="padding:0.2rem 0.45rem;font-size:0.7rem;margin:0.1rem;display:inline-block">' +
+            escapeHtml(lbl) +
+            "</button> ";
+        });
+      }
+      if (!docButtons) {
+        docButtons = '<span style="color:var(--color-text-muted)">None</span>';
+      }
       var tr = document.createElement("tr");
       tr.innerHTML =
         '<td><div class="cell-flex"><img class="avatar avatar--sm" src="../assets/images/avatar-2.svg" alt="" /><span><strong>' +
@@ -63,8 +84,9 @@
         escapeHtml(catLabel) +
         "</small></span></div></td>" +
         '<td><span class="badge badge--pending">Pending</span></td>' +
-        "<td>—</td>" +
-        "<td>—</td>" +
+        "<td>" +
+        docButtons +
+        "</td>" +
         '<td><button type="button" class="btn btn--secondary js-approve" data-id="' +
         escapeHtml(p.id) +
         '" style="padding: 0.35rem 0.65rem; font-size: 0.75rem">Approve</button> ' +
@@ -98,12 +120,28 @@
     var first = await loadPending(sb);
     if (first.error) {
       tbody.innerHTML =
-        '<tr><td colspan="5">' + escapeHtml(first.error) + "</td></tr>";
+        '<tr><td colspan="4">' + escapeHtml(first.error) + "</td></tr>";
       return;
     }
     render(tbody, first.rows, catMap);
 
     root.addEventListener("click", async function (e) {
+      var docBtn = e.target && e.target.closest && e.target.closest(".js-license-doc");
+      if (docBtn && docBtn.getAttribute) {
+        e.preventDefault();
+        var path = docBtn.getAttribute("data-path");
+        if (!path) return;
+        var signed = await sb.storage.from("provider-documents").createSignedUrl(path, 600);
+        if (signed.error) {
+          window.alert(signed.error.message);
+          return;
+        }
+        if (signed.data && signed.data.signedUrl) {
+          window.open(signed.data.signedUrl, "_blank", "noopener,noreferrer");
+        }
+        return;
+      }
+
       var t = e.target;
       if (!t || !t.getAttribute) return;
       var id = t.getAttribute("data-id");
