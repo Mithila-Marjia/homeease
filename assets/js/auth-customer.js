@@ -4,13 +4,23 @@
 (function () {
   "use strict";
 
-  function showError(el, msg) {
+  function showError(el, msg, opts) {
+    opts = opts || {};
     if (!el) {
       window.alert(msg);
       return;
     }
     el.textContent = msg;
     el.hidden = false;
+    if (opts.success) {
+      el.style.color = "var(--color-primary, #2563eb)";
+    } else {
+      el.style.color = "#b91c1c";
+    }
+  }
+
+  function mapAuthErr(raw) {
+    return window.homeEaseFriendlyAuthError ? window.homeEaseFriendlyAuthError(raw) : raw;
   }
 
   function qs(sel) {
@@ -52,7 +62,7 @@
     });
 
     if (res.error) {
-      showError(errEl, res.error.message);
+      showError(errEl, mapAuthErr(res.error.message));
       return;
     }
 
@@ -62,7 +72,8 @@
     } else {
       showError(
         errEl,
-        "Check your email to confirm your account, then sign in. (You can disable email confirmation in Supabase Auth settings while developing.)"
+        "Check your email to confirm your account, then sign in. (You can disable email confirmation in Supabase Auth settings while developing.)",
+        { success: true }
       );
     }
   }
@@ -84,7 +95,7 @@
     });
 
     if (res.error) {
-      showError(errEl, res.error.message);
+      showError(errEl, mapAuthErr(res.error.message));
       return;
     }
 
@@ -92,7 +103,7 @@
     var prof = await sb.from("profiles").select("role").eq("id", uid).maybeSingle();
 
     if (prof.error) {
-      showError(errEl, prof.error.message);
+      showError(errEl, mapAuthErr(prof.error.message));
       return;
     }
 

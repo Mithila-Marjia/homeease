@@ -11,6 +11,11 @@
     }
     el.textContent = msg;
     el.hidden = false;
+    el.style.color = "#b91c1c";
+  }
+
+  function mapAuthErr(raw) {
+    return window.homeEaseFriendlyAuthError ? window.homeEaseFriendlyAuthError(raw) : raw;
   }
 
   function qs(sel) {
@@ -34,7 +39,7 @@
     });
 
     if (res.error) {
-      showError(errEl, res.error.message);
+      showError(errEl, mapAuthErr(res.error.message));
       return;
     }
 
@@ -42,7 +47,7 @@
     var prof = await sb.from("profiles").select("role").eq("id", uid).maybeSingle();
 
     if (prof.error) {
-      showError(errEl, prof.error.message);
+      showError(errEl, mapAuthErr(prof.error.message));
       return;
     }
 
