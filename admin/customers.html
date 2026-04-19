@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Customers — HomeEase Admin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../assets/css/global.css" />
+  </head>
+  <body data-homeease-guard="admin" data-admin-users-role="customer">
+    <div class="sidebar-backdrop" data-sidebar-backdrop aria-hidden="true"></div>
+    <div class="dashboard">
+      <aside class="sidebar" data-sidebar aria-label="Admin navigation">
+        <div class="sidebar__brand">
+          <strong>Admin Portal</strong>
+          <small>HomeEase</small>
+        </div>
+        <div class="sidebar__profile">
+          <img class="avatar avatar--sm" src="../assets/images/avatar-1.svg" alt="" width="36" height="36" />
+          <div>
+            <strong data-homeease-profile-name>Admin</strong>
+            <span>Super Admin</span>
+          </div>
+        </div>
+        <nav class="nav-list">
+          <a href="dashboard.html">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="7" height="9" rx="1" />
+              <rect x="14" y="3" width="7" height="5" rx="1" />
+              <rect x="14" y="12" width="7" height="9" rx="1" />
+              <rect x="3" y="16" width="7" height="5" rx="1" />
+            </svg>
+            Overview
+          </a>
+          <a href="bookings.html">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0" />
+            </svg>
+            Bookings
+          </a>
+          <a href="provider-requests.html">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+              <path d="M22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
+            </svg>
+            Provider requests
+          </a>
+          <a class="is-active" href="customers.html">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+            </svg>
+            Customers
+          </a>
+          <a href="users.html">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+              <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
+            </svg>
+            All users
+          </a>
+          <a href="providers.html">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+            </svg>
+            Providers
+          </a>
+          <a href="earnings.html">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" />
+            </svg>
+            Earnings
+          </a>
+          <a href="notifications.html">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0" />
+            </svg>
+            Notifications
+          </a>
+          <a href="settings.html">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="3" />
+              <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+            </svg>
+            Settings
+          </a>
+        </nav>
+        <div class="sidebar__footer">
+          <a href="../customer/index.html">Customer site</a>
+        </div>
+      </aside>
+
+      <div class="dashboard__main">
+        <div class="admin-topbar">
+          <div class="container admin-topbar__inner" style="width: 100%; max-width: none; margin: 0; padding-inline: 1.25rem">
+            <button type="button" class="nav-toggle" data-sidebar-toggle aria-label="Open menu">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
+            <a class="brand brand--homeease" href="../customer/index.html" style="font-size: 0.95rem">HomeEase</a>
+            <div class="dashboard-top__actions" style="margin-left: auto">
+              <button type="button" class="icon-btn" data-admin-signout aria-label="Log out">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="dashboard-content container" style="width: 100%; max-width: none; margin: 0">
+          <div class="dashboard-top">
+            <div>
+              <h1 style="margin-bottom: 0.35rem">Customers</h1>
+              <p style="margin: 0; color: var(--color-text-muted); max-width: 640px">
+                Homeowners with role <strong>customer</strong>. Edit contact details from the list.
+              </p>
+            </div>
+          </div>
+
+          <section class="card panel" style="margin-top: 1rem" data-admin-users>
+            <div class="table-wrap">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Role</th>
+                    <th>Provider</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td colspan="6" style="padding: 1rem; color: var(--color-text-muted)">Loading…</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+
+    <script src="../assets/js/config.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../assets/js/supabase-init.js"></script>
+    <script src="../assets/js/admin-core.js"></script>
+    <script src="../assets/js/dashboard-guard.js"></script>
+    <script src="../assets/js/admin-users.js"></script>
+    <script src="../assets/js/main.js"></script>
+  </body>
+</html>
