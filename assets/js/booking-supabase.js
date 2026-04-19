@@ -10,7 +10,11 @@
   }
 
   function money(n) {
-    return "$" + (n / 100).toFixed(0);
+    var taka = (Number(n) || 0) / 100;
+    if (window.homeEaseMoney && window.homeEaseMoney.fromTakaAmount) {
+      return window.homeEaseMoney.fromTakaAmount(taka);
+    }
+    return "৳\u00A0" + taka.toLocaleString("en-BD", { maximumFractionDigits: 0 });
   }
 
   window.homeEaseAfterBookingSubmit = async function (payload) {

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My services — HomeEase Provider</title>
+    <title>Edit service — HomeEase Provider</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -117,41 +117,18 @@
         <div class="dashboard-content container" style="width: 100%; max-width: none; margin: 0">
           <div class="dashboard-top">
             <div>
-              <h1 style="margin-bottom: 0.35rem">My services</h1>
+              <p style="margin: 0 0 0.5rem">
+                <a href="services.html" class="link-arrow" style="font-size: 0.875rem">← Back to my services</a>
+              </p>
+              <h1 style="margin-bottom: 0.35rem">Edit service</h1>
               <p style="margin: 0; color: var(--color-text-muted); max-width: 640px">
-                Listings appear on the customer marketplace when marked active.
+                Update pricing, description, category, or replace the listing image.
               </p>
             </div>
           </div>
 
-          <section class="card panel" style="margin-top: 1rem" data-provider-services-page>
-            <div class="table-wrap">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th>Image</th>
-                    <th>Title</th>
-                    <th>Category</th>
-                    <th>Base price</th>
-                    <th>Booking fee</th>
-                    <th>Status</th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td colspan="7" style="padding: 1rem; color: var(--color-text-muted)">Loading…</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </section>
-
-          <section class="card panel" style="margin-top: 1.25rem">
-            <div class="panel__head">
-              <h3 style="margin: 0">Add a service</h3>
-            </div>
-            <form data-provider-add-service class="field-grid" style="display: grid; gap: 0.75rem; max-width: 560px; margin-top: 1rem">
+          <section class="card panel" style="margin-top: 1rem">
+            <form data-provider-edit-service class="field-grid" style="display: grid; gap: 0.75rem; max-width: 560px; margin-top: 0.5rem">
               <p data-provider-service-error hidden style="color: #b91c1c; margin: 0; font-size: 0.875rem"></p>
               <div class="field" style="margin: 0">
                 <label for="svcTitle">Title</label>
@@ -159,7 +136,7 @@
               </div>
               <div class="field" style="margin: 0">
                 <label for="svcSlug">URL slug (optional)</label>
-                <input class="input input--pill" id="svcSlug" type="text" placeholder="Leave blank — auto from title (e.g. ac-service-banani)" />
+                <input class="input input--pill" id="svcSlug" type="text" placeholder="Leave blank — auto from title" />
               </div>
               <div class="field" style="margin: 0">
                 <label for="svcCategory">Category</label>
@@ -170,15 +147,16 @@
               <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem">
                 <div class="field" style="margin: 0">
                   <label for="svcPrice">Base price (BDT)</label>
-                  <input class="input input--pill" id="svcPrice" type="number" min="0" step="1" required value="99" />
+                  <input class="input input--pill" id="svcPrice" type="number" min="0" step="1" required />
                 </div>
                 <div class="field" style="margin: 0">
                   <label for="svcFee">Booking fee (BDT)</label>
-                  <input class="input input--pill" id="svcFee" type="number" min="0" step="1" value="9" />
+                  <input class="input input--pill" id="svcFee" type="number" min="0" step="1" />
                 </div>
               </div>
+              <div data-service-image-preview hidden style="margin: 0"></div>
               <div class="field" style="margin: 0">
-                <label for="svcImage">Service image (optional)</label>
+                <label for="svcImage">Replace image (optional)</label>
                 <input class="input input--pill" id="svcImage" type="file" accept="image/jpeg,image/png,image/webp" />
               </div>
               <div class="field" style="margin: 0">
@@ -189,7 +167,10 @@
                 <label for="svcDesc">Description</label>
                 <textarea class="textarea" id="svcDesc" rows="3" placeholder="What’s included, parts/labour, and what the customer should keep ready."></textarea>
               </div>
-              <button type="submit" class="btn btn--primary" style="justify-self: start">Publish service</button>
+              <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; align-items: center">
+                <button type="submit" class="btn btn--primary">Save changes</button>
+                <a class="btn btn--outline" href="services.html">Cancel</a>
+              </div>
             </form>
           </section>
         </div>
@@ -203,9 +184,8 @@
     <script src="../assets/js/provider-core.js"></script>
     <script src="../assets/js/dashboard-guard.js"></script>
     <script src="../assets/js/notifications-ui.js"></script>
-    <script src="../assets/js/provider-services-page.js"></script>
     <script src="../assets/js/provider-service-storage.js"></script>
-    <script src="../assets/js/provider-add-service.js"></script>
+    <script src="../assets/js/provider-edit-service.js"></script>
     <script src="../assets/js/main.js"></script>
   </body>
 </html>

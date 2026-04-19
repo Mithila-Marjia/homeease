@@ -65,7 +65,11 @@
       var imgSrc =
         svc.image_url ||
         "../assets/images/hero-placeholder.svg";
-      var price = "$" + (svc.price_cents / 100).toFixed(0) + "+";
+      var priceNum = svc.price_cents / 100;
+      var price =
+        window.homeEaseMoney && window.homeEaseMoney.fromTakaAmount
+          ? window.homeEaseMoney.fromTakaAmount(priceNum) + "+"
+          : "৳\u00A0" + priceNum.toLocaleString("en-BD", { maximumFractionDigits: 0 }) + "+";
       var card = document.createElement("article");
       card.className = "service-card card-lift";
       card.innerHTML =
@@ -215,7 +219,10 @@
   }
 
   function money(n) {
-    return "$" + n.toFixed(0);
+    if (window.homeEaseMoney && window.homeEaseMoney.fromTakaAmount) {
+      return window.homeEaseMoney.fromTakaAmount(n);
+    }
+    return "৳\u00A0" + Number(n).toLocaleString("en-BD", { maximumFractionDigits: 0 });
   }
 
   document.addEventListener("DOMContentLoaded", async function () {

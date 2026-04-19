@@ -161,6 +161,7 @@
                 <table class="table">
                   <thead>
                     <tr>
+                      <th>Image</th>
                       <th>Title</th>
                       <th>Category</th>
                       <th>Price</th>
@@ -170,7 +171,7 @@
                   </thead>
                   <tbody>
                     <tr>
-                      <td colspan="5" style="padding: 1rem; color: var(--color-text-muted)">Loading…</td>
+                      <td colspan="6" style="padding: 1rem; color: var(--color-text-muted)">Loading…</td>
                     </tr>
                   </tbody>
                 </table>
@@ -195,13 +196,17 @@
                   </div>
                   <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem">
                     <div class="field" style="margin: 0">
-                      <label for="svcPrice">Base price (USD)</label>
+                      <label for="svcPrice">Base price (BDT)</label>
                       <input class="input input--pill" id="svcPrice" type="number" min="0" step="1" required value="99" />
                     </div>
                     <div class="field" style="margin: 0">
-                      <label for="svcFee">Booking fee (USD)</label>
+                      <label for="svcFee">Booking fee (BDT)</label>
                       <input class="input input--pill" id="svcFee" type="number" min="0" step="1" value="9" />
                     </div>
+                  </div>
+                  <div class="field" style="margin: 0">
+                    <label for="svcImage">Service image (optional)</label>
+                    <input class="input input--pill" id="svcImage" type="file" accept="image/jpeg,image/png,image/webp" />
                   </div>
                   <div class="field" style="margin: 0">
                     <label for="svcDuration">Typical duration</label>
@@ -299,11 +304,13 @@
     <script src="../assets/js/config.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="../assets/js/supabase-init.js"></script>
+    <script src="../assets/js/money-bdt.js"></script>
     <script src="../assets/js/provider-core.js"></script>
     <script src="../assets/js/dashboard-guard.js"></script>
     <script src="../assets/js/notifications-ui.js"></script>
     <script src="../assets/js/provider-dashboard-stats.js"></script>
     <script src="../assets/js/provider-dashboard-data.js"></script>
+    <script src="../assets/js/provider-service-storage.js"></script>
     <script src="../assets/js/provider-add-service.js"></script>
     <script src="../assets/js/main.js"></script>
   </body>

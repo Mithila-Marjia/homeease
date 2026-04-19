@@ -15,20 +15,20 @@
             slug: "elec-panel",
             title: "Panel & safety inspection",
             desc: "Breaker testing, grounding check, and load review for peace of mind.",
-            price: "From $249",
+            price: "From ৳\u00A0249",
             tag: "Popular",
           },
           {
             slug: "elec-outlet",
             title: "Outlets & switches",
             desc: "Replace worn outlets, add USB ports, dimmers, and three-way switches.",
-            price: "From $89",
+            price: "From ৳\u00A089",
           },
           {
             slug: "elec-lighting",
             title: "Lighting installation",
             desc: "Fixtures, recessed cans, under-cabinet, and exterior security lighting.",
-            price: "From $125",
+            price: "From ৳\u00A0125",
           },
         ],
       },
@@ -41,20 +41,20 @@
             slug: "plumb-leak",
             title: "Leak detection & repair",
             desc: "Pinpoint hidden leaks, repair supply lines, and protect cabinets & floors.",
-            price: "From $149",
+            price: "From ৳\u00A0149",
             tag: "Same-day",
           },
           {
             slug: "plumb-drain",
             title: "Drain cleaning",
             desc: "Kitchen, bath, and main line clearing with camera options.",
-            price: "From $129",
+            price: "From ৳\u00A0129",
           },
           {
             slug: "plumb-heater",
             title: "Water heater service",
             desc: "Flush, element & thermostat checks, and replacement quotes.",
-            price: "From $199",
+            price: "From ৳\u00A0199",
           },
         ],
       },
@@ -67,20 +67,20 @@
             slug: "hvac-tune",
             title: "Seasonal tune-up",
             desc: "Full system check, refrigerant & electrical inspection, safety controls.",
-            price: "From $159",
+            price: "From ৳\u00A0159",
             tag: "Popular",
           },
           {
             slug: "hvac-ac",
             title: "AC repair & diagnostics",
             desc: "No cold air, odd noises, or short cycling—priority summer dispatch.",
-            price: "From $189",
+            price: "From ৳\u00A0189",
           },
           {
             slug: "hvac-furnace",
             title: "Furnace repair",
             desc: "Ignition, blower, and limit-switch issues for gas & electric units.",
-            price: "From $199",
+            price: "From ৳\u00A0199",
           },
         ],
       },
@@ -93,19 +93,19 @@
             slug: "land-lawn",
             title: "Lawn mowing & edging",
             desc: "Weekly or bi-weekly cuts, trim, and bag or mulch clippings.",
-            price: "From $55",
+            price: "From ৳\u00A055",
           },
           {
             slug: "land-garden",
             title: "Mulch & garden beds",
             desc: "Refresh beds, weed barrier, seasonal color, and shrub shaping.",
-            price: "From $175",
+            price: "From ৳\u00A0175",
           },
           {
             slug: "land-sprinkler",
             title: "Sprinkler & irrigation check",
             desc: "Zone tests, head adjustments, leak detection, and timer setup.",
-            price: "From $95",
+            price: "From ৳\u00A095",
           },
         ],
       },
@@ -118,20 +118,20 @@
             slug: "clean-deep",
             title: "Deep home clean",
             desc: "Kitchen, baths, floors, baseboards, and interior glass—top-to-bottom.",
-            price: "From $189",
+            price: "From ৳\u00A0189",
             tag: "Popular",
           },
           {
             slug: "clean-move",
             title: "Move-in / move-out clean",
             desc: "Empty-home pass for landlords, sellers, and new homeowners.",
-            price: "From $249",
+            price: "From ৳\u00A0249",
           },
           {
             slug: "clean-recurring",
             title: "Recurring housekeeping",
             desc: "Weekly, bi-weekly, or monthly visits with the same vetted crew when possible.",
-            price: "From $99/visit",
+            price: "From ৳\u00A099/visit",
           },
         ],
       },
@@ -153,7 +153,7 @@
           "Thermal spot-check on hot breakers",
           "Written summary with photos via HomeEase",
         ],
-        addons: ["Whole-home GFCI/AFCI assessment (+$75)", "Label & map circuits (+$45)"],
+        addons: ["Whole-home GFCI/AFCI assessment (+৳\u00A075)", "Label & map circuits (+৳\u00A045)"],
         warranty: "90-day workmanship warranty on labor booked through HomeEase.",
       },
       "elec-outlet": {
@@ -171,7 +171,7 @@
           "Code-compliant materials or use your supplied devices",
           "Patch-friendly trim and testing before we leave",
         ],
-        addons: ["AFCI/GFCI upgrade per circuit (+$65)", "Smart switch pairing (+$35 each)"],
+        addons: ["AFCI/GFCI upgrade per circuit (+৳\u00A065)", "Smart switch pairing (+৳\u00A035 each)"],
         warranty: "90-day workmanship warranty on labor booked through HomeEase.",
       },
       "elec-lighting": {
@@ -189,7 +189,7 @@
           "Bulb-ready testing and switch verification",
           "Basic ceiling patch recommendations if box upgrade needed",
         ],
-        addons: ["Heavy fixture brace & support (+$85)", "Dimmer compatibility check (+$25)"],
+        addons: ["Heavy fixture brace & support (+৳\u00A085)", "Dimmer compatibility check (+৳\u00A025)"],
         warranty: "90-day workmanship warranty on labor booked through HomeEase.",
       },
       "plumb-leak": {
@@ -207,7 +207,7 @@
           "Minor seal and packing repairs included in base window",
           "Moisture guidance and dry-out tips",
         ],
-        addons: ["Electronic leak locate (+$120)", "Drywall access patch (+ quoted)"],
+        addons: ["Electronic leak locate (+৳\u00A0120)", "Drywall access patch (+ quoted)"],
         warranty: "30-day leak-free guarantee on repaired joints booked through HomeEase.",
       },
       "plumb-drain": {
@@ -225,7 +225,7 @@
           "Clean-out access assessment",
           "Post-flow test at fixtures",
         ],
-        addons: ["Camera inspection (+$175)", "Hydro-jet (quoted on site)"],
+        addons: ["Camera inspection (+৳\u00A0175)", "Hydro-jet (quoted on site)"],
         warranty: "14-day re-clear on same line if blockage returns (terms apply).",
       },
       "plumb-heater": {
@@ -243,7 +243,7 @@
           "Element/thermostat test on electric units",
           "Combustion & venting visual on gas units",
         ],
-        addons: ["Anode rod replacement (+$95 + parts)", "Expansion tank install (+ quoted)"],
+        addons: ["Anode rod replacement (+৳\u00A095 + parts)", "Expansion tank install (+ quoted)"],
         warranty: "30-day labor warranty on adjustments made during visit.",
       },
       "hvac-tune": {
@@ -261,7 +261,7 @@
           "Refrigerant pressure spot-check (no recharge included)",
           "Thermostat calibration & filter replacement if you supply filter",
         ],
-        addons: ["UV light install (+ quoted)", "Duct leakage consult (+$85)"],
+        addons: ["UV light install (+ quoted)", "Duct leakage consult (+৳\u00A085)"],
         warranty: "Satisfaction revisit on tune scope within 14 days.",
       },
       "hvac-ac": {
@@ -279,7 +279,7 @@
           "Small parts commonly stocked on truck",
           "Written options before major component swaps",
         ],
-        addons: ["After-hours emergency (+$95)", "Refrigerant top-off per lb (EPA rules apply)"],
+        addons: ["After-hours emergency (+৳\u00A095)", "Refrigerant top-off per lb (EPA rules apply)"],
         warranty: "90-day labor on repairs completed during visit.",
       },
       "hvac-furnace": {
@@ -297,7 +297,7 @@
           "Safety limit & rollout testing",
           "Combustion analysis on supported models",
         ],
-        addons: ["Carbon monoxide spot test (+$45)", "Humidifier service (+$75)"],
+        addons: ["Carbon monoxide spot test (+৳\u00A045)", "Humidifier service (+৳\u00A075)"],
         warranty: "90-day labor on repairs completed during visit.",
       },
       "land-lawn": {
@@ -315,7 +315,7 @@
           "Line trim & hard-edge sidewalks",
           "Bag or mulch clippings—specify in notes",
         ],
-        addons: ["Hedge trim front shrubs (+$45)", "Leaf blow patios (+$25)"],
+        addons: ["Hedge trim front shrubs (+৳\u00A045)", "Leaf blow patios (+৳\u00A025)"],
         warranty: "Revisit for missed strips reported within 24 hours.",
       },
       "land-garden": {
@@ -351,7 +351,7 @@
           "Adjust spray patterns away from hardscape",
           "Battery & backup check on controller",
         ],
-        addons: ["Solenoid replacement (+ parts)", "Rain sensor install (+$120)"],
+        addons: ["Solenoid replacement (+ parts)", "Rain sensor install (+৳\u00A0120)"],
         warranty: "14-day callback on adjustments made during visit.",
       },
       "clean-deep": {
@@ -369,7 +369,7 @@
           "Bath disinfect & glass polish",
           "Vacuum, mop, and baseboard dust",
         ],
-        addons: ["Inside oven & fridge (+$45 each)", "Interior windows (+$8/pane avg)"],
+        addons: ["Inside oven & fridge (+৳\u00A045 each)", "Interior windows (+৳\u00A08/pane avg)"],
         warranty: "Re-clean touch-up for missed areas reported within 24 hours.",
       },
       "clean-move": {
@@ -387,7 +387,7 @@
           "Bath descale & fixture polish",
           "Garage sweep (1-car) if selected in notes",
         ],
-        addons: ["Carpet spot treatment (+$75)", "Wall wash (+ quoted)"],
+        addons: ["Carpet spot treatment (+৳\u00A075)", "Wall wash (+ quoted)"],
         warranty: "48-hour punch-list window for rental inspections.",
       },
       "clean-recurring": {
@@ -405,7 +405,7 @@
           "Dust living areas & vacuum traffic lanes",
           "One rotating deep task per visit (e.g., blinds)",
         ],
-        addons: ["Laundry fold (+$25/load)", "Change bed linens (+$15/bed)"],
+        addons: ["Laundry fold (+৳\u00A025/load)", "Change bed linens (+৳\u00A015/bed)"],
         warranty: "Skip/credit policy per HomeEase membership terms.",
       },
     },
@@ -424,7 +424,14 @@
   }
 
   function formatMoney(n) {
-    return "$" + n.toFixed(0);
+    var t = Number(n) || 0;
+    return (
+      "৳\u00A0" +
+      t.toLocaleString("en-BD", {
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0,
+      })
+    );
   }
 
   function getServiceHero(slug) {

@@ -13,8 +13,11 @@
   }
 
   function moneyCents(c) {
+    if (window.homeEaseMoney && typeof window.homeEaseMoney.fromCents === "function") {
+      return window.homeEaseMoney.fromCents(c);
+    }
     var n = Number(c) || 0;
-    return "$" + (n / 100).toFixed(2);
+    return "৳\u00A0" + (n / 100).toFixed(2);
   }
 
   async function signOut() {
