@@ -26,20 +26,49 @@
     return map;
   }
 
+  function missingLicenseColumn(err) {
+    if (!err || !err.message) return false;
+    var m = String(err.message).toLowerCase();
+    return m.indexOf("provider_license_files") !== -1 && m.indexOf("does not exist") !== -1;
+  }
+
   async function loadPending(sb) {
+    var full =
+      "id, email, full_name, phone, experience_years, primary_category_id, provider_status, provider_license_files";
+    var minimal =
+      "id, email, full_name, phone, experience_years, primary_category_id, provider_status";
+
+    var migrationPending = false;
     var res = await sb
       .from("profiles")
-      .select("id, email, full_name, phone, experience_years, primary_category_id, provider_status, provider_license_files")
+      .select(full)
       .eq("role", "provider")
       .eq("provider_status", "pending")
       .order("created_at", { ascending: true });
+
+    if (res.error && missingLicenseColumn(res.error)) {
+      migrationPending = true;
+      res = await sb
+        .from("profiles")
+        .select(minimal)
+        .eq("role", "provider")
+        .eq("provider_status", "pending")
+        .order("created_at", { ascending: true });
+    }
 
     if (res.error) {
       console.error(res.error);
       return { error: res.error.message, rows: [] };
     }
 
-    return { error: null, rows: res.data || [] };
+    var rows = res.data || [];
+    rows.forEach(function (p) {
+      if (p.provider_license_files === undefined) {
+        p.provider_license_files = [];
+      }
+    });
+
+    return { error: null, rows: rows, migrationPending: migrationPending };
   }
 
   function render(tbody, rows, catMap) {
@@ -123,6 +152,20 @@
         '<tr><td colspan="4">' + escapeHtml(first.error) + "</td></tr>";
       return;
     }
+
+    if (first.migrationPending) {
+      var existing = root.querySelector("[data-migration-hint]");
+      if (!existing) {
+        var hint = document.createElement("p");
+        hint.setAttribute("data-migration-hint", "");
+        hint.style.cssText =
+          "margin:0 0 0.75rem;font-size:0.8125rem;color:#b45309;max-width:52rem";
+        hint.textContent =
+          "Database migration not applied: license files column is missing. Approve/reject works below. Run supabase/migrations/20260423120000_provider_license_storage.sql in the Supabase SQL Editor to enable document links.";
+        root.insertBefore(hint, root.firstChild);
+      }
+    }
+
     render(tbody, first.rows, catMap);
 
     root.addEventListener("click", async function (e) {
