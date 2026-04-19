@@ -17,14 +17,6 @@
     return document.querySelector(sel);
   }
 
-  function categorySlugFromSelect(selectEl) {
-    if (!selectEl) return "";
-    var v = selectEl.value;
-    if (v) return v;
-    var opt = selectEl.options[selectEl.selectedIndex];
-    return opt ? String(opt.value || "").trim() : "";
-  }
-
   async function onSignupSubmit(e) {
     e.preventDefault();
     var sb = window.homeEaseSupabase && window.homeEaseSupabase();
@@ -36,7 +28,6 @@
     var name = (qs("#name") && qs("#name").value) || "";
     var email = (qs("#email") && qs("#email").value) || "";
     var phone = (qs("#phone") && qs("#phone").value) || "";
-    var cat = categorySlugFromSelect(qs("#category"));
     var exp = (qs("#experience") && qs("#experience").value) || "";
     var pw = (qs("#password") && qs("#password").value) || "";
     var pw2 = (qs("#password2") && qs("#password2").value) || "";
@@ -46,16 +37,10 @@
       return;
     }
 
-    if (!cat) {
-      showError(errEl, "Please select a primary service category.");
-      return;
-    }
-
     var meta = {
       full_name: name.trim(),
       phone: phone.trim(),
       role: "provider",
-      primary_category_slug: cat,
       experience_years: exp ? String(parseInt(exp, 10)) : "",
     };
 
