@@ -26,11 +26,21 @@
     }
 
     var uid = sessionRes.data.session.user.id;
-    var profRes = await sb
-      .from("profiles")
-      .select("role, provider_status, full_name, email")
-      .eq("id", uid)
-      .maybeSingle();
+    // Admin pages do not need avatar_url; selecting a missing column breaks the query and causes a login loop.
+    var profileSelect =
+      mode === "provider"
+        ? "role, provider_status, full_name, email, avatar_url"
+        : "role, provider_status, full_name, email";
+
+    var profRes = await sb.from("profiles").select(profileSelect).eq("id", uid).maybeSingle();
+
+    if (profRes.error && mode === "provider" && /avatar_url|column/i.test(String(profRes.error.message || ""))) {
+      profRes = await sb
+        .from("profiles")
+        .select("role, provider_status, full_name, email")
+        .eq("id", uid)
+        .maybeSingle();
+    }
 
     if (profRes.error || !profRes.data) {
       await sb.auth.signOut();
@@ -62,6 +72,12 @@
     var nameEl = qs("[data-homeease-profile-name]");
     if (nameEl && p.full_name) {
       nameEl.textContent = p.full_name;
+    }
+
+    var avatarEl = qs("[data-homeease-profile-avatar]");
+    if (avatarEl && p.avatar_url) {
+      avatarEl.src = p.avatar_url;
+      avatarEl.referrerPolicy = "no-referrer";
     }
   });
 })();

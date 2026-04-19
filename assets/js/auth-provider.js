@@ -1,6 +1,6 @@
 /**
  * Provider registration (pending until admin approves) and provider sign-in.
- * License uploads use Supabase Storage bucket `provider-documents` after sign-up (requires session).
+ * Face photo → bucket `provider-avatars`; license uploads → `provider-documents` (after sign-up, requires session).
  */
 (function () {
   "use strict";
@@ -8,6 +8,7 @@
   var LICENSE_BUCKET = "provider-documents";
   var MAX_LICENSE_FILES = 5;
   var MAX_LICENSE_BYTES = 10485760;
+  var MAX_FACE_BYTES = 2097152;
   var ALLOWED_LICENSE_TYPES = {
     "application/pdf": true,
     "image/jpeg": true,
@@ -42,6 +43,138 @@
     return String(name || "file")
       .replace(/[^a-zA-Z0-9._-]/g, "_")
       .slice(0, 120);
+  }
+
+  function validateFacePhotoFile(file) {
+    if (!file) {
+      return "Please upload a profile photo showing your face.";
+    }
+    if (file.size > MAX_FACE_BYTES) {
+      return "Profile photo must be 2 MB or smaller.";
+    }
+    var ok =
+      ALLOWED_LICENSE_TYPES[file.type] && /^image\/(jpeg|png|webp)$/.test(file.type);
+    if (!ok && file.type === "") {
+      ok = /\.(jpe?g|png|webp)$/i.test(file.name);
+    }
+    if (!ok) {
+      return "Profile photo must be JPEG, PNG, or WebP.";
+    }
+    return "";
+  }
+
+  function validateFaceAttest() {
+    var el = qs("#providerFaceAttest");
+    if (!el || !el.checked) {
+      return "Please confirm that the photo is of your own face.";
+    }
+    return "";
+  }
+
+  /** When supported (e.g. Chromium), require at least one detected face. */
+  function validateFaceDetectionIfAvailable(file) {
+    return new Promise(function (resolve) {
+      if (typeof FaceDetector === "undefined") {
+        resolve("");
+        return;
+      }
+      var url = URL.createObjectURL(file);
+      var img = new Image();
+      img.onload = function () {
+        try {
+          var canvas = document.createElement("canvas");
+          canvas.width = img.naturalWidth;
+          canvas.height = img.naturalHeight;
+          var ctx = canvas.getContext("2d");
+          if (!ctx) {
+            URL.revokeObjectURL(url);
+            resolve("");
+            return;
+          }
+          ctx.drawImage(img, 0, 0);
+          URL.revokeObjectURL(url);
+          var detector;
+          try {
+            detector = new FaceDetector({ fastMode: true, maxDetectedFaces: 4 });
+          } catch (e) {
+            resolve("");
+            return;
+          }
+          detector
+            .detect(canvas)
+            .then(function (faces) {
+              if (!faces || faces.length < 1) {
+                resolve(
+                  "We could not detect a face in this image. Use a clear, front-facing photo with good lighting."
+                );
+                return;
+              }
+              if (faces.length > 1) {
+                resolve("Please use a photo with only your face visible (one person in the frame).");
+                return;
+              }
+              resolve("");
+            })
+            .catch(function () {
+              resolve("");
+            });
+        } catch (e) {
+          URL.revokeObjectURL(url);
+          resolve("");
+        }
+      };
+      img.onerror = function () {
+        URL.revokeObjectURL(url);
+        resolve("Could not read this image. Try another JPEG or PNG.");
+      };
+      img.src = url;
+    });
+  }
+
+  function wireFacePhotoPreview() {
+    var input = qs("#providerFacePhoto");
+    var preview = qs("[data-face-preview]");
+    if (!input || !preview) return;
+    input.addEventListener("change", function () {
+      preview.innerHTML = "";
+      preview.style.display = "none";
+      var f = input.files && input.files[0];
+      if (!f || !/^image\//.test(f.type)) return;
+      var url = URL.createObjectURL(f);
+      var im = document.createElement("img");
+      im.alt = "Preview";
+      im.style.maxWidth = "120px";
+      im.style.maxHeight = "120px";
+      im.style.borderRadius = "8px";
+      im.style.objectFit = "cover";
+      im.onload = function () {
+        URL.revokeObjectURL(url);
+      };
+      im.src = url;
+      preview.appendChild(im);
+      preview.style.display = "block";
+    });
+  }
+
+  async function uploadAvatarAfterSignup(sb, userId, file) {
+    if (!window.homeEaseUploadProviderAvatar) {
+      return { error: "Avatar upload helper missing." };
+    }
+    var up = await window.homeEaseUploadProviderAvatar(sb, userId, file);
+    if (up.error) {
+      return { error: up.error.message || "Avatar upload failed." };
+    }
+    var res = await sb
+      .from("profiles")
+      .update({
+        avatar_url: up.publicUrl,
+        updated_at: new Date().toISOString(),
+      })
+      .eq("id", userId);
+    if (res.error) {
+      return { error: res.error.message };
+    }
+    return { error: null };
   }
 
   function validateLicenseFiles(files) {
@@ -183,9 +316,28 @@
     var pw2 = (qs("#password2") && qs("#password2").value) || "";
     var fileInput = qs("#providerLicenseFiles");
     var files = fileInput && fileInput.files ? Array.prototype.slice.call(fileInput.files) : [];
+    var faceInput = qs("#providerFacePhoto");
+    var faceFile = faceInput && faceInput.files && faceInput.files[0];
 
     if (pw !== pw2) {
       showError(errEl, "Passwords do not match.");
+      return;
+    }
+
+    var faceErr = validateFacePhotoFile(faceFile);
+    if (faceErr) {
+      showError(errEl, faceErr);
+      return;
+    }
+    var attestErr = validateFaceAttest();
+    if (attestErr) {
+      showError(errEl, attestErr);
+      return;
+    }
+
+    var detectErr = await validateFaceDetectionIfAvailable(faceFile);
+    if (detectErr) {
+      showError(errEl, detectErr);
       return;
     }
 
@@ -218,6 +370,19 @@
     var successParts = [
       "Account created. An admin must approve your provider profile before you can sign in. Admins receive an in-app notification when you register.",
     ];
+
+    if (user && session && faceFile) {
+      var avRes = await uploadAvatarAfterSignup(sb, user.id, faceFile);
+      if (avRes.error) {
+        successParts.push(" Profile photo upload failed: " + avRes.error);
+      } else {
+        successParts.push(" Profile photo saved.");
+      }
+    } else if (user && !session && faceFile) {
+      successParts.push(
+        " Profile photo was not uploaded (no active session—often when email confirmation is on). Disable confirmation in Supabase Auth for testing, then sign in and update your photo from Profile."
+      );
+    }
 
     if (files.length && user) {
       if (!session) {
@@ -293,6 +458,7 @@
 
   document.addEventListener("DOMContentLoaded", function () {
     wireLicenseUploadUI();
+    wireFacePhotoPreview();
 
     var signupForm = qs("[data-auth-signup-provider]");
     var signinForm = qs("[data-auth-signin-provider]");

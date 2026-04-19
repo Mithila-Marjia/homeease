@@ -18,7 +18,7 @@
           <small>HomeEase</small>
         </div>
         <div class="sidebar__profile">
-          <img class="avatar avatar--sm" src="../assets/images/avatar-2.svg" alt="" width="36" height="36" />
+          <img class="avatar avatar--sm" src="../assets/images/avatar-2.svg" alt="" width="36" height="36" data-homeease-profile-avatar referrerpolicy="no-referrer" />
           <div>
             <strong data-homeease-profile-name>Provider</strong>
             <span>Verified</span>
@@ -118,7 +118,7 @@
           <div class="dashboard-top">
             <div>
               <h1 style="margin-bottom: 0.35rem">Profile</h1>
-              <p style="margin: 0; color: var(--color-text-muted)">Update how customers see your name and contact info.</p>
+              <p style="margin: 0; color: var(--color-text-muted)">Update your name, contact info, and profile photo.</p>
             </div>
           </div>
 
@@ -126,6 +126,33 @@
             <form data-provider-profile-form class="field-grid" style="display: grid; gap: 1rem">
               <p data-provider-profile-error hidden style="color: #b91c1c; margin: 0; font-size: 0.875rem"></p>
               <p data-provider-profile-success hidden style="color: var(--color-primary); margin: 0; font-size: 0.875rem"></p>
+              <div class="field" style="margin: 0">
+                <label>Profile photo</label>
+                <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap">
+                  <img
+                    data-provider-profile-photo
+                    src="../assets/images/avatar-2.svg"
+                    alt=""
+                    width="80"
+                    height="80"
+                    style="border-radius: 12px; object-fit: cover"
+                    referrerpolicy="no-referrer"
+                  />
+                  <div>
+                    <label for="providerAvatarReplace" class="sr-only">Replace profile photo</label>
+                    <input
+                      class="input input--pill"
+                      type="file"
+                      id="providerAvatarReplace"
+                      accept="image/jpeg,image/png,image/webp"
+                      style="padding: 0.35rem; max-width: 16rem"
+                    />
+                    <p style="margin: 0.35rem 0 0; font-size: 0.75rem; color: var(--color-text-muted)">
+                      Face photo only · max 2 MB · JPEG, PNG, or WebP
+                    </p>
+                  </div>
+                </div>
+              </div>
               <div class="field" style="margin: 0">
                 <label for="providerFullName">Full name</label>
                 <input class="input input--pill" id="providerFullName" type="text" required autocomplete="name" />
@@ -148,6 +175,7 @@
     <script src="../assets/js/provider-core.js"></script>
     <script src="../assets/js/dashboard-guard.js"></script>
     <script src="../assets/js/notifications-ui.js"></script>
+    <script src="../assets/js/provider-avatar-storage.js"></script>
     <script src="../assets/js/provider-profile.js"></script>
     <script src="../assets/js/main.js"></script>
   </body>

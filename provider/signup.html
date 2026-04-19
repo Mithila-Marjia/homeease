@@ -83,6 +83,30 @@
             />
           </div>
           <div class="field">
+            <label for="providerFacePhoto">Your profile photo (face) — required</label>
+            <p style="margin: 0 0 0.5rem; font-size: 0.8125rem; color: var(--color-text-muted)">
+              A clear, well-lit photo of <strong>your face only</strong> (like a passport or LinkedIn headshot—not a logo, group
+              photo, or document scan). JPEG, PNG, or WebP. Max 2 MB.
+            </p>
+            <input
+              class="input input--pill"
+              type="file"
+              id="providerFacePhoto"
+              name="face_photo"
+              accept="image/jpeg,image/png,image/webp"
+              capture="user"
+              required
+              style="padding: 0.5rem"
+            />
+            <div data-face-preview style="margin-top: 0.5rem; display: none"></div>
+            <label style="margin-top: 0.75rem; display: flex; gap: 0.5rem; align-items: flex-start; cursor: pointer">
+              <input type="checkbox" id="providerFaceAttest" name="face_attest" required style="margin-top: 0.2rem; flex-shrink: 0" />
+              <span style="font-size: 0.875rem"
+                >I confirm this is a recent photo of <strong>my own face</strong> for customer verification.</span
+              >
+            </label>
+          </div>
+          <div class="field">
             <label id="docs-label" for="providerLicenseFiles">Licenses &amp; insurance (PDF or images)</label>
             <p style="margin: 0 0 0.5rem; font-size: 0.8125rem; color: var(--color-text-muted)">
               Up to 5 files, 10 MB each. Stored securely after you register.
@@ -150,6 +174,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="../assets/js/supabase-init.js"></script>
     <script src="../assets/js/auth-errors.js"></script>
+    <script src="../assets/js/provider-avatar-storage.js"></script>
     <script src="../assets/js/auth-provider.js"></script>
   </body>
 </html>

@@ -26,17 +26,9 @@
     return map;
   }
 
-  function missingLicenseColumn(err) {
-    if (!err || !err.message) return false;
-    var m = String(err.message).toLowerCase();
-    return m.indexOf("provider_license_files") !== -1 && m.indexOf("does not exist") !== -1;
-  }
-
   async function loadPending(sb) {
     var full =
-      "id, email, full_name, phone, experience_years, primary_category_id, provider_status, provider_license_files";
-    var minimal =
-      "id, email, full_name, phone, experience_years, primary_category_id, provider_status";
+      "id, email, full_name, phone, experience_years, primary_category_id, provider_status, provider_license_files, avatar_url";
 
     var migrationPending = false;
     var res = await sb
@@ -46,11 +38,11 @@
       .eq("provider_status", "pending")
       .order("created_at", { ascending: true });
 
-    if (res.error && missingLicenseColumn(res.error)) {
+    if (res.error) {
       migrationPending = true;
       res = await sb
         .from("profiles")
-        .select(minimal)
+        .select("id, email, full_name, phone, experience_years, primary_category_id, provider_status")
         .eq("role", "provider")
         .eq("provider_status", "pending")
         .order("created_at", { ascending: true });
@@ -105,9 +97,12 @@
       if (!docButtons) {
         docButtons = '<span style="color:var(--color-text-muted)">None</span>';
       }
+      var avatarSrc = p.avatar_url ? escapeHtml(p.avatar_url) : "../assets/images/avatar-2.svg";
       var tr = document.createElement("tr");
       tr.innerHTML =
-        '<td><div class="cell-flex"><img class="avatar avatar--sm" src="../assets/images/avatar-2.svg" alt="" /><span><strong>' +
+        '<td><div class="cell-flex"><img class="avatar avatar--sm" src="' +
+        avatarSrc +
+        '" alt="" referrerpolicy="no-referrer" /><span><strong>' +
         escapeHtml(p.full_name || p.email) +
         "</strong><br /><small style=\"color: var(--color-text-muted)\">" +
         escapeHtml(catLabel) +
@@ -128,6 +123,15 @@
 
   async function setStatus(sb, id, status) {
     var res = await sb.from("profiles").update({ provider_status: status }).eq("id", id);
+    if (res.error) {
+      window.alert(res.error.message);
+      return false;
+    }
+    return true;
+  }
+
+  async function deletePendingProviderAccount(sb, id) {
+    var res = await sb.rpc("admin_delete_pending_provider", { _user_id: id });
     if (res.error) {
       window.alert(res.error.message);
       return false;
@@ -161,7 +165,7 @@
         hint.style.cssText =
           "margin:0 0 0.75rem;font-size:0.8125rem;color:#b45309;max-width:52rem";
         hint.textContent =
-          "Database migration not applied: license files column is missing. Approve/reject works below. Run supabase/migrations/20260423120000_provider_license_storage.sql in the Supabase SQL Editor to enable document links.";
+          "Some profile columns may be missing. Approve/reject still works. Run pending SQL migrations (e.g. provider license + provider avatar) via Supabase SQL Editor or supabase db push.";
         root.insertBefore(hint, root.firstChild);
       }
     }
@@ -194,8 +198,14 @@
         var ok = await setStatus(sb, id, "approved");
         if (!ok) return;
       } else if (t.classList.contains("js-reject")) {
-        if (!window.confirm("Reject this provider application?")) return;
-        var ok2 = await setStatus(sb, id, "rejected");
+        if (
+          !window.confirm(
+            "Reject and permanently delete this account? They can register again with the same email. This cannot be undone."
+          )
+        ) {
+          return;
+        }
+        var ok2 = await deletePendingProviderAccount(sb, id);
         if (!ok2) return;
       } else {
         return;

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Providers — HomeEase Admin</title>
+    <title>Categories — HomeEase Admin</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -46,7 +46,7 @@
             </svg>
             Services
           </a>
-          <a href="categories.html">
+          <a class="is-active" href="categories.html">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <rect x="3" y="3" width="7" height="7" rx="1" />
               <rect x="14" y="3" width="7" height="7" rx="1" />
@@ -78,7 +78,7 @@
             </svg>
             All users
           </a>
-          <a class="is-active" href="providers.html">
+          <a href="providers.html">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2" />
               <circle cx="9" cy="7" r="4" />
@@ -129,35 +129,98 @@
           </div>
         </div>
 
-        <div class="dashboard-content container" style="width: 100%; max-width: none; margin: 0">
+        <div class="dashboard-content container" style="width: 100%; max-width: none; margin: 0" data-admin-categories>
           <div class="dashboard-top">
             <div>
-              <h1 style="margin-bottom: 0.35rem">Approved providers</h1>
-              <p style="margin: 0; color: var(--color-text-muted); max-width: 640px">
-                Providers cleared to operate on HomeEase. Pending applications live under Provider requests.
+              <h1 style="margin-bottom: 0.35rem">Categories</h1>
+              <p style="margin: 0; color: var(--color-text-muted); max-width: 720px">
+                Marketplace categories (slug is used in URLs and filters). Customers and providers see this list after data loads.
               </p>
             </div>
           </div>
 
-          <section class="card panel" style="margin-top: 1rem" data-admin-providers-directory>
+          <section class="card panel" style="margin-top: 1rem">
             <div class="table-wrap">
               <table class="table">
                 <thead>
                   <tr>
+                    <th>Slug</th>
                     <th>Name</th>
-                    <th>Email</th>
-                    <th>Primary category</th>
-                    <th>Experience (yrs)</th>
-                    <th>Status</th>
+                    <th>Description</th>
+                    <th>Sort</th>
+                    <th>Created</th>
+                    <th></th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody data-admin-categories-list>
                   <tr>
-                    <td colspan="5" style="padding: 1rem; color: var(--color-text-muted)">Loading…</td>
+                    <td colspan="6" style="padding: 1rem; color: var(--color-text-muted)">Loading…</td>
                   </tr>
                 </tbody>
               </table>
             </div>
+          </section>
+
+          <section class="card panel" style="margin-top: 1.25rem" data-admin-category-edit-wrap hidden>
+            <div class="panel__head">
+              <h3 style="margin: 0">Edit category</h3>
+            </div>
+            <p data-admin-category-edit-error hidden style="color: #b91c1c; margin: 0.75rem 0 0; font-size: 0.875rem"></p>
+            <form data-admin-category-edit class="field-grid" style="display: grid; gap: 0.75rem; max-width: 520px; margin-top: 1rem">
+              <input type="hidden" id="catEditId" />
+              <div class="field" style="margin: 0">
+                <label for="catEditName">Display name</label>
+                <input class="input input--pill" id="catEditName" type="text" required />
+              </div>
+              <div class="field" style="margin: 0">
+                <label for="catEditSlug">URL slug</label>
+                <input class="input input--pill" id="catEditSlug" type="text" required />
+                <button type="button" class="btn btn--ghost btn--sm" data-fill-slug-edit-from-name style="margin-top: 0.35rem">
+                  Generate slug from name
+                </button>
+              </div>
+              <div class="field" style="margin: 0">
+                <label for="catEditDesc">Description (optional)</label>
+                <textarea class="textarea" id="catEditDesc" rows="2"></textarea>
+              </div>
+              <div class="field" style="margin: 0">
+                <label for="catEditSort">Sort order</label>
+                <input class="input input--pill" id="catEditSort" type="number" min="0" step="1" />
+              </div>
+              <div style="display: flex; gap: 0.75rem; flex-wrap: wrap">
+                <button type="submit" class="btn btn--primary">Save changes</button>
+                <button type="button" class="btn btn--outline" data-admin-category-edit-cancel>Cancel</button>
+              </div>
+            </form>
+          </section>
+
+          <section class="card panel" style="margin-top: 1.25rem">
+            <div class="panel__head">
+              <h3 style="margin: 0">Add category</h3>
+            </div>
+            <p data-admin-category-error hidden style="color: #b91c1c; margin: 0.75rem 0 0; font-size: 0.875rem"></p>
+            <form data-admin-category-create class="field-grid" style="display: grid; gap: 0.75rem; max-width: 520px; margin-top: 1rem">
+              <div class="field" style="margin: 0">
+                <label for="catName">Display name</label>
+                <input class="input input--pill" id="catName" type="text" required placeholder="e.g. Pest control" />
+              </div>
+              <div class="field" style="margin: 0">
+                <label for="catSlug">URL slug</label>
+                <input class="input input--pill" id="catSlug" type="text" required placeholder="e.g. pest-control" />
+                <button type="button" class="btn btn--ghost btn--sm" data-fill-slug-from-name style="margin-top: 0.35rem">
+                  Generate slug from name
+                </button>
+              </div>
+              <div class="field" style="margin: 0">
+                <label for="catDesc">Description (optional)</label>
+                <textarea class="textarea" id="catDesc" rows="2" placeholder="Short blurb for admins"></textarea>
+              </div>
+              <div class="field" style="margin: 0">
+                <label for="catSort">Sort order</label>
+                <input class="input input--pill" id="catSort" type="number" min="0" step="1" placeholder="Lower appears first" />
+              </div>
+              <button type="submit" class="btn btn--primary" style="justify-self: start">Create category</button>
+            </form>
           </section>
         </div>
       </div>
@@ -169,7 +232,7 @@
     <script src="../assets/js/money-bdt.js"></script>
     <script src="../assets/js/admin-core.js"></script>
     <script src="../assets/js/dashboard-guard.js"></script>
-    <script src="../assets/js/admin-providers-directory.js"></script>
+    <script src="../assets/js/admin-categories.js"></script>
     <script src="../assets/js/main.js"></script>
   </body>
 </html>
