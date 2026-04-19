@@ -217,7 +217,7 @@ $$;
 CREATE TRIGGER on_auth_user_created
 AFTER INSERT ON auth.users
 FOR EACH ROW
-EXECUTE PROCEDURE public.handle_new_user ();
+EXECUTE FUNCTION public.handle_new_user ();
 
 -- ---------------------------------------------------------------------------
 -- 5) Notifications: new pending provider → notify every admin
@@ -258,7 +258,7 @@ $$;
 CREATE TRIGGER trg_profiles_notify_admins_provider
 AFTER INSERT ON public.profiles
 FOR EACH ROW
-EXECUTE PROCEDURE public.notify_admins_new_provider ();
+EXECUTE FUNCTION public.notify_admins_new_provider ();
 
 -- ---------------------------------------------------------------------------
 -- 6) Notifications: new booking → notify assigned provider
@@ -303,7 +303,7 @@ $$;
 CREATE TRIGGER trg_bookings_notify_provider
 AFTER INSERT ON public.bookings
 FOR EACH ROW
-EXECUTE PROCEDURE public.notify_provider_new_booking ();
+EXECUTE FUNCTION public.notify_provider_new_booking ();
 
 -- Derive provider from the booked service (customers cannot pick a random provider_id)
 CREATE OR REPLACE FUNCTION public.bookings_set_provider_from_service ()
@@ -331,16 +331,10 @@ $$;
 CREATE TRIGGER trg_bookings_set_provider
 BEFORE INSERT ON public.bookings
 FOR EACH ROW
-EXECUTE PROCEDURE public.bookings_set_provider_from_service ();
+EXECUTE FUNCTION public.bookings_set_provider_from_service ();
 
 -- ---------------------------------------------------------------------------
--- 7) Realtime (optional: subscribe to notifications in the browser)
--- ---------------------------------------------------------------------------
-ALTER PUBLICATION supabase_realtime
-ADD TABLE public.notifications;
-
--- ---------------------------------------------------------------------------
--- 8) Row Level Security
+-- 7) Row Level Security
 -- ---------------------------------------------------------------------------
 ALTER TABLE public.profiles ENABLE ROW LEVEL SECURITY;
 
@@ -478,7 +472,7 @@ USING (auth.uid () = user_id)
 WITH CHECK (auth.uid () = user_id);
 
 -- ---------------------------------------------------------------------------
--- 9) Seed categories (match customer UI slugs in browse.js)
+-- 8) Seed categories (match customer UI slugs in browse.js)
 -- ---------------------------------------------------------------------------
 INSERT INTO public.categories (slug, name, description, sort_order)
 VALUES
@@ -490,5 +484,5 @@ VALUES
 ON CONFLICT (slug) DO NOTHING;
 
 -- ---------------------------------------------------------------------------
--- 10) Promote your first admin (replace email after you sign up once)
+-- 9) Promote your first admin (replace email after you sign up once)
 -- -- UPDATE public.profiles SET role = 'admin' WHERE email = 'you@example.com';
