@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Account — HomeEase</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assets/css/global.css" />
+  </head>
+  <body class="auth-page">
+    <header class="site-header">
+      <div class="container site-header__inner">
+        <a class="brand brand--homeease" href="index.html">HomeEase</a>
+        <div class="header-actions">
+          <a class="btn btn--ghost" href="signin.html">Sign In</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="auth-main">
+      <div class="card auth-card auth-card--wide">
+        <div class="auth-logo">
+          <a class="brand brand--homeease" href="index.html">HomeEase</a>
+        </div>
+        <h1 class="auth-title">Create your account</h1>
+        <p class="auth-sub">Join HomeEase to book vetted home service pros and track every visit.</p>
+
+        <p class="auth-footer-text" data-auth-error hidden style="color: #b91c1c; margin-bottom: 0.75rem"></p>
+
+        <form action="#" method="post" data-auth-signup-customer>
+          <div class="field">
+            <label for="name">Full name</label>
+            <input
+              class="input input--pill"
+              type="text"
+              id="name"
+              name="name"
+              placeholder="Jordan Blake"
+              required
+              autocomplete="name"
+            />
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input
+              class="input input--pill"
+              type="email"
+              id="email"
+              name="email"
+              placeholder="you@example.com"
+              required
+              autocomplete="email"
+            />
+          </div>
+          <div class="field">
+            <label for="phone">Phone number</label>
+            <input
+              class="input input--pill"
+              type="tel"
+              id="phone"
+              name="phone"
+              placeholder="+1 (555) 000-0000"
+              required
+              autocomplete="tel"
+            />
+          </div>
+          <div class="field">
+            <label for="password">Password</label>
+            <input
+              class="input input--pill"
+              type="password"
+              id="password"
+              name="password"
+              placeholder="At least 8 characters"
+              required
+              minlength="8"
+              autocomplete="new-password"
+            />
+          </div>
+          <div class="field">
+            <label for="password2">Confirm password</label>
+            <input
+              class="input input--pill"
+              type="password"
+              id="password2"
+              name="password2"
+              placeholder="Repeat password"
+              required
+              minlength="8"
+              autocomplete="new-password"
+            />
+          </div>
+          <label class="checkbox field">
+            <input type="checkbox" name="terms" required />
+            <span>I agree to the <a href="#">Terms &amp; Conditions</a> and <a href="#">Privacy Policy</a>.</span>
+          </label>
+          <button type="submit" class="btn btn--primary btn--block btn--lg">Sign Up</button>
+        </form>
+
+        <p class="auth-footer-text">
+          Already have an account?
+          <a href="signin.html">Sign in</a>
+        </p>
+      </div>
+    </main>
+
+    <footer class="site-footer" style="margin-top: 0">
+      <div class="container footer-bar" style="border-top: none; padding-top: 0">
+        <span>© 2026 HomeEase</span>
+        <a href="index.html">Back to home</a>
+      </div>
+    </footer>
+    <script src="../assets/js/config.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../assets/js/supabase-init.js"></script>
+    <script src="../assets/js/auth-customer.js"></script>
+  </body>
+</html>

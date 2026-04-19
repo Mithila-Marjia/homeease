@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>All categories — HomeEase</title>
+    <meta
+      name="description"
+      content="Browse HomeEase home service categories: electrical, plumbing, HVAC, landscaping, and deep cleaning."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assets/css/global.css" />
+  </head>
+  <body class="page-browse">
+    <header class="site-header site-header--browse">
+      <div class="container site-header__inner">
+        <a class="brand brand--homeease" href="index.html">HomeEase</a>
+        <nav class="browse-header-nav" aria-label="Browse">
+          <a href="categories.html" aria-current="page">Categories</a>
+          <a href="index.html">Home</a>
+        </nav>
+        <div class="header-actions">
+          <a class="btn btn--ghost btn--signin-browse" href="signin.html">Sign In</a>
+          <a class="btn btn--primary btn--browse-cta" href="signup.html">Get Started</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="browse-main">
+      <div class="container">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="index.html">Home</a>
+          <span class="breadcrumb__sep" aria-hidden="true">/</span>
+          <span class="breadcrumb__current">All categories</span>
+        </nav>
+
+        <header class="browse-page-header">
+          <h1 class="browse-page-header__title">Browse home services</h1>
+          <p class="browse-page-header__lead">
+            Choose a category to see popular jobs, upfront pricing guides, and book a verified pro on HomeEase.
+          </p>
+        </header>
+
+        <div class="categories-grid">
+          <a class="category-tile card-lift" href="category.html?c=electrical">
+            <div class="category-tile__icon" aria-hidden="true">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+              </svg>
+            </div>
+            <h2 class="category-tile__title">Electrical</h2>
+            <p class="category-tile__meta">Panels, lighting, outlets, smart devices</p>
+            <span class="category-tile__link">View services →</span>
+          </a>
+
+          <a class="category-tile card-lift" href="category.html?c=plumbing">
+            <div class="category-tile__icon" aria-hidden="true">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2.69l5.66 5.66a8 8 0 11-11.31 0z" />
+              </svg>
+            </div>
+            <h2 class="category-tile__title">Plumbing</h2>
+            <p class="category-tile__meta">Leaks, drains, fixtures, water heaters</p>
+            <span class="category-tile__link">View services →</span>
+          </a>
+
+          <a class="category-tile card-lift" href="category.html?c=hvac">
+            <div class="category-tile__icon" aria-hidden="true">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4" />
+              </svg>
+            </div>
+            <h2 class="category-tile__title">HVAC</h2>
+            <p class="category-tile__meta">AC, furnace, tune-ups, filters</p>
+            <span class="category-tile__link">View services →</span>
+          </a>
+
+          <a class="category-tile card-lift" href="category.html?c=landscape">
+            <div class="category-tile__icon" aria-hidden="true">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 22c4-4 8-8 8-12a8 8 0 10-16 0c0 4 4 8 8 12z" />
+              </svg>
+            </div>
+            <h2 class="category-tile__title">Landscaping</h2>
+            <p class="category-tile__meta">Lawn, beds, mulch, sprinklers</p>
+            <span class="category-tile__link">View services →</span>
+          </a>
+
+          <a class="category-tile card-lift" href="category.html?c=cleaning">
+            <div class="category-tile__icon" aria-hidden="true">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 22h16M6 18v-1a2 2 0 012-2h8a2 2 0 012 2v1M10 15V9M8 9h8M9 5h6l-1 4H10L9 5z" />
+              </svg>
+            </div>
+            <h2 class="category-tile__title">Deep cleaning</h2>
+            <p class="category-tile__meta">Deep cleans, move-in/out, recurring</p>
+            <span class="category-tile__link">View services →</span>
+          </a>
+        </div>
+      </div>
+    </main>
+
+    <footer class="site-footer site-footer--browse">
+      <div class="container footer-bar" style="border-top: none; padding: 1.5rem 0">
+        <span>© 2026 HomeEase</span>
+        <a href="index.html">Back to home</a>
+      </div>
+    </footer>
+  </body>
+</html>

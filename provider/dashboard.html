@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Provider Dashboard — Architectural Concierge</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assets/css/global.css" />
+  </head>
+  <body data-homeease-guard="provider">
+    <div class="sidebar-backdrop" data-sidebar-backdrop aria-hidden="true"></div>
+    <div class="dashboard">
+      <aside class="sidebar" data-sidebar aria-label="Provider navigation">
+        <div class="sidebar__brand">
+          <strong>Provider Portal</strong>
+          <small>Service operations</small>
+        </div>
+        <div class="sidebar__profile">
+          <img class="avatar avatar--sm" src="../assets/images/avatar-2.svg" alt="" width="36" height="36" />
+          <div>
+            <strong data-homeease-profile-name>Provider</strong>
+            <span>HomeEase Pro</span>
+          </div>
+        </div>
+        <nav class="nav-list">
+          <a class="is-active" href="dashboard.html">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="7" height="9" rx="1" />
+              <rect x="14" y="3" width="7" height="5" rx="1" />
+              <rect x="14" y="12" width="7" height="9" rx="1" />
+              <rect x="3" y="16" width="7" height="5" rx="1" />
+            </svg>
+            Dashboard
+          </a>
+          <a href="#">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+            </svg>
+            My Services
+          </a>
+          <a href="#">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="4" width="18" height="18" rx="2" />
+              <path d="M16 2v4M8 2v4M3 10h18" />
+            </svg>
+            Bookings
+          </a>
+          <a href="#">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" />
+            </svg>
+            Earnings
+          </a>
+          <a href="#">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
+              <circle cx="12" cy="7" r="4" />
+            </svg>
+            Profile
+          </a>
+        </nav>
+        <button type="button" class="btn btn--primary btn--block sidebar__cta">Generate Report</button>
+        <div class="sidebar__footer">
+          <a href="#">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10" />
+              <path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3M12 17h.01" />
+            </svg>
+            Support
+          </a>
+          <a href="#">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="3" />
+              <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+            </svg>
+            Settings
+          </a>
+        </div>
+      </aside>
+
+      <div class="dashboard__main">
+        <div class="admin-topbar">
+          <div class="container admin-topbar__inner" style="width: 100%; max-width: none; margin: 0; padding-inline: 1.25rem">
+            <button type="button" class="nav-toggle" data-sidebar-toggle aria-label="Open menu">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
+            <a class="brand" href="../customer/index.html" style="font-size: 0.95rem">
+              <span class="brand__mark">AC</span>
+              Concierge Pro
+            </a>
+          </div>
+        </div>
+
+        <div class="dashboard-content container" style="width: 100%; max-width: none; margin: 0">
+          <div class="dashboard-top">
+            <div>
+              <h1 style="margin-bottom: 0.35rem">Welcome back, Alex.</h1>
+              <p style="margin: 0; color: var(--color-accent); font-weight: 600; font-size: 0.9rem">
+                ★ 4.9/5 · Elite Pro badge
+              </p>
+            </div>
+            <div class="dashboard-top__actions">
+              <span class="pill-stat">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 12V7H5a2 2 0 010-4h14v4" />
+                  <path d="M3 5v14a2 2 0 002 2h16v-5" />
+                  <path d="M18 12a2 2 0 00-2 2v4h4v-4a2 2 0 00-2-2z" />
+                </svg>
+                $4,250.00
+              </span>
+              <button type="button" class="icon-btn" aria-label="Notifications" style="position: relative">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0" />
+                </svg>
+                <span
+                  data-homeease-notifications-badge
+                  style="
+                    display: none;
+                    position: absolute;
+                    top: 4px;
+                    right: 4px;
+                    min-width: 1rem;
+                    height: 1rem;
+                    padding: 0 0.2rem;
+                    background: #ef4444;
+                    color: #fff;
+                    border-radius: 99px;
+                    font-size: 0.65rem;
+                    line-height: 1rem;
+                    font-weight: 700;
+                  "
+                ></span>
+              </button>
+            </div>
+          </div>
+
+          <div class="stat-grid">
+            <article class="card stat-card">
+              <div class="stat-card__label">Total earnings</div>
+              <div class="stat-card__value">$4,250</div>
+              <div class="stat-card__trend stat-card__trend--up">
+                <span class="badge badge--verified" style="text-transform: none; letter-spacing: 0">+12%</span> vs last
+                month
+              </div>
+            </article>
+            <article class="card stat-card">
+              <div class="stat-card__label">Active jobs</div>
+              <div class="stat-card__value">8</div>
+              <div class="stat-card__trend" style="color: var(--color-primary)">New bookings this week</div>
+            </article>
+            <article class="card stat-card">
+              <div class="stat-card__label">Customer rating</div>
+              <div class="stat-card__value"><span class="stars">★★★★★</span> 4.9</div>
+              <div class="stat-card__trend">Based on 126 reviews</div>
+            </article>
+            <article class="card stat-card">
+              <div class="stat-card__label">Completion rate</div>
+              <div class="stat-card__value">98%</div>
+              <div style="margin-top: 0.5rem; height: 6px; background: #e2e8f0; border-radius: 99px; overflow: hidden">
+                <div style="width: 98%; height: 100%; background: var(--color-accent)"></div>
+              </div>
+            </article>
+          </div>
+
+          <div class="panel-grid panel-grid--split" style="margin-top: 1.25rem">
+            <section class="card panel" data-provider-services>
+              <div class="panel__head">
+                <h3 style="margin: 0">My services</h3>
+                <span style="font-size: 0.8125rem; color: var(--color-text-muted)">Live listings appear on the customer marketplace.</span>
+              </div>
+              <div class="table-wrap">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Title</th>
+                      <th>Category</th>
+                      <th>Price</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td colspan="4" style="padding: 1rem; color: var(--color-text-muted)">Loading…</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--color-border, #e2e8f0)">
+                <h4 style="margin: 0 0 0.75rem; font-size: 0.95rem">Add a service</h4>
+                <form data-provider-add-service class="field-grid" style="display: grid; gap: 0.75rem">
+                  <p data-provider-service-error hidden style="color: #b91c1c; margin: 0; font-size: 0.875rem"></p>
+                  <div class="field" style="margin: 0">
+                    <label for="svcTitle">Title</label>
+                    <input class="input input--pill" id="svcTitle" type="text" required placeholder="e.g. Seasonal AC tune-up" />
+                  </div>
+                  <div class="field" style="margin: 0">
+                    <label for="svcSlug">URL slug (optional)</label>
+                    <input class="input input--pill" id="svcSlug" type="text" placeholder="auto-generated from title if empty" />
+                  </div>
+                  <div class="field" style="margin: 0">
+                    <label for="svcCategory">Category</label>
+                    <select class="select select--pill" id="svcCategory" required>
+                      <option value="">Loading categories…</option>
+                    </select>
+                  </div>
+                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem">
+                    <div class="field" style="margin: 0">
+                      <label for="svcPrice">Base price (USD)</label>
+                      <input class="input input--pill" id="svcPrice" type="number" min="0" step="1" required value="99" />
+                    </div>
+                    <div class="field" style="margin: 0">
+                      <label for="svcFee">Booking fee (USD)</label>
+                      <input class="input input--pill" id="svcFee" type="number" min="0" step="1" value="9" />
+                    </div>
+                  </div>
+                  <div class="field" style="margin: 0">
+                    <label for="svcDuration">Typical duration</label>
+                    <input class="input input--pill" id="svcDuration" type="text" placeholder="e.g. 1–2 hours" />
+                  </div>
+                  <div class="field" style="margin: 0">
+                    <label for="svcDesc">Description</label>
+                    <textarea class="textarea" id="svcDesc" rows="3" placeholder="What’s included, materials, and homeowner expectations."></textarea>
+                  </div>
+                  <button type="submit" class="btn btn--primary" style="justify-self: start">Publish service</button>
+                </form>
+              </div>
+            </section>
+
+            <aside class="card panel panel--dark">
+              <div class="panel__head">
+                <h3 style="margin: 0">Quick actions</h3>
+              </div>
+              <p class="muted" style="margin-top: 0; font-size: 0.875rem">
+                Update availability, add a new line item, or request your next payout.
+              </p>
+              <div style="display: grid; gap: 0.65rem; margin-top: 1rem">
+                <a class="btn btn--outline" style="border-color: rgba(255,255,255,0.35); color: #fff; text-align: center" href="../customer/category.html?c=electrical">Preview marketplace</a>
+                <button type="button" class="btn btn--outline" style="border-color: rgba(255,255,255,0.35); color: #fff">
+                  View Schedule
+                </button>
+                <button type="button" class="btn btn--secondary">Request Payout</button>
+              </div>
+            </aside>
+          </div>
+
+          <div class="panel-grid panel-grid--split">
+            <section class="card panel" data-provider-bookings>
+              <div class="panel__head">
+                <h3 style="margin: 0">Recent bookings</h3>
+                <a class="link-arrow" href="#">View calendar →</a>
+              </div>
+              <div class="table-wrap">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Customer</th>
+                      <th>Service</th>
+                      <th>Date</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td colspan="4" style="padding: 1rem; color: var(--color-text-muted)">Loading…</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </section>
+          </div>
+
+          <div class="panel-grid panel-grid--split" style="margin-top: 1.25rem">
+            <section class="card panel">
+              <div class="panel__head">
+                <h3 style="margin: 0">Earnings trend</h3>
+                <div style="display: flex; gap: 0.35rem">
+                  <button type="button" class="btn btn--secondary" style="padding: 0.35rem 0.85rem; font-size: 0.75rem">
+                    Week
+                  </button>
+                  <button type="button" class="btn btn--ghost" style="padding: 0.35rem 0.85rem; font-size: 0.75rem">
+                    Month
+                  </button>
+                </div>
+              </div>
+              <div class="bar-chart" aria-hidden="true">
+                <div class="bar" style="height: 40%"></div>
+                <div class="bar" style="height: 55%"></div>
+                <div class="bar" style="height: 48%"></div>
+                <div class="bar bar--active" style="height: 72%"></div>
+                <div class="bar" style="height: 60%"></div>
+                <div class="bar" style="height: 68%"></div>
+                <div class="bar" style="height: 52%"></div>
+              </div>
+              <div
+                style="
+                  display: flex;
+                  justify-content: space-between;
+                  font-size: 0.6875rem;
+                  color: var(--color-text-muted);
+                  text-transform: uppercase;
+                  letter-spacing: 0.06em;
+                "
+              >
+                <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span
+                ><span>Sun</span>
+              </div>
+            </section>
+            <section class="card panel">
+              <div class="panel__head">
+                <h3 style="margin: 0">Recent reviews</h3>
+                <a class="link-arrow" href="#">Read all →</a>
+              </div>
+              <div class="review-item">
+                <div class="stars">★★★★★</div>
+                <strong>“On time, spotless work.”</strong>
+                <div class="activity-meta">Morgan · 2h ago</div>
+              </div>
+              <div class="review-item">
+                <div class="stars">★★★★☆</div>
+                <strong>“Great communication on HVAC scope.”</strong>
+                <div class="activity-meta">Leo · 1d ago</div>
+              </div>
+              <div class="review-item">
+                <div class="stars">★★★★★</div>
+                <strong>“Handled a complex panel with ease.”</strong>
+                <div class="activity-meta">Priya · 3d ago</div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button type="button" class="fab" aria-label="Add booking">+</button>
+    <script src="../assets/js/config.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../assets/js/supabase-init.js"></script>
+    <script src="../assets/js/dashboard-guard.js"></script>
+    <script src="../assets/js/notifications-ui.js"></script>
+    <script src="../assets/js/provider-dashboard-data.js"></script>
+    <script src="../assets/js/provider-add-service.js"></script>
+    <script src="../assets/js/main.js"></script>
+  </body>
+</html>

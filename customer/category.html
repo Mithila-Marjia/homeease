@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Services — HomeEase</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assets/css/global.css" />
+  </head>
+  <body class="page-browse" data-browse-page="category" data-marketplace="remote">
+    <header class="site-header site-header--browse">
+      <div class="container site-header__inner">
+        <a class="brand brand--homeease" href="index.html">HomeEase</a>
+        <nav class="browse-header-nav" aria-label="Browse">
+          <a href="categories.html">Categories</a>
+          <a href="index.html">Home</a>
+        </nav>
+        <div class="header-actions">
+          <a class="btn btn--ghost btn--signin-browse" href="signin.html">Sign In</a>
+          <a class="btn btn--primary btn--browse-cta" href="signup.html">Get Started</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="browse-main">
+      <div class="container">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="index.html">Home</a>
+          <span class="breadcrumb__sep" aria-hidden="true">/</span>
+          <a href="categories.html">Categories</a>
+          <span class="breadcrumb__sep" aria-hidden="true">/</span>
+          <span class="breadcrumb__current" id="browseBreadcrumbCurrent">Services</span>
+        </nav>
+
+        <header class="browse-page-header">
+          <h1 class="browse-page-header__title" id="browseCategoryTitle">Loading…</h1>
+          <p class="browse-page-header__lead" id="browseCategoryLead"></p>
+        </header>
+
+        <div class="services-grid" id="browseServiceGrid"></div>
+      </div>
+    </main>
+
+    <footer class="site-footer site-footer--browse">
+      <div class="container footer-bar" style="border-top: none; padding: 1.5rem 0">
+        <span>© 2026 HomeEase</span>
+        <a href="categories.html">All categories</a>
+      </div>
+    </footer>
+    <script src="../assets/js/config.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../assets/js/supabase-init.js"></script>
+    <script src="../assets/js/browse-supabase.js"></script>
+    <script src="../assets/js/browse.js"></script>
+  </body>
+</html>

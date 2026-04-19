@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Provider Registration — Architectural Concierge</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assets/css/global.css" />
+  </head>
+  <body class="auth-page">
+    <header class="site-header">
+      <div class="container site-header__inner">
+        <a class="brand" href="../customer/index.html">
+          <span class="brand__mark">AC</span>
+          Architectural Concierge
+        </a>
+        <div class="header-actions">
+          <a class="btn btn--ghost" href="signin.html">Provider Sign In</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="auth-main">
+      <div class="card auth-card auth-card--wide">
+        <div class="auth-logo">
+          <a class="brand" href="../customer/index.html">
+            <span class="brand__mark">AC</span>
+            Architectural Concierge
+          </a>
+        </div>
+        <h1 class="auth-title">Register as a provider</h1>
+        <p class="auth-sub">List your services, set coverage, and join the verified guild.</p>
+
+        <p class="auth-footer-text" data-auth-error hidden style="color: #b91c1c; margin-bottom: 0.75rem"></p>
+
+        <form action="#" method="post" data-auth-signup-provider>
+          <div class="field">
+            <label for="name">Full name</label>
+            <input
+              class="input input--pill"
+              type="text"
+              id="name"
+              name="name"
+              placeholder="Alex Rivers"
+              required
+              autocomplete="name"
+            />
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input
+              class="input input--pill"
+              type="email"
+              id="email"
+              name="email"
+              placeholder="pro@yourcompany.com"
+              required
+              autocomplete="email"
+            />
+          </div>
+          <div class="field">
+            <label for="phone">Phone number</label>
+            <input
+              class="input input--pill"
+              type="tel"
+              id="phone"
+              name="phone"
+              placeholder="+1 (555) 000-0000"
+              required
+              autocomplete="tel"
+            />
+          </div>
+          <div class="field">
+            <label for="category">Service category</label>
+            <select class="select select--pill" id="category" name="category" required>
+              <option value="" disabled selected>Select a trade</option>
+              <option value="electrical">Electrical</option>
+              <option value="plumbing">Plumbing</option>
+              <option value="hvac">HVAC</option>
+              <option value="cleaning">Cleaning</option>
+              <option value="landscape">Landscaping</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="experience">Experience (years)</label>
+            <input
+              class="input input--pill"
+              type="number"
+              id="experience"
+              name="experience"
+              min="0"
+              max="60"
+              placeholder="e.g. 5"
+              required
+            />
+          </div>
+          <div class="field">
+            <span id="docs-label">Licenses &amp; insurance (PDF)</span>
+            <div class="upload-zone" role="button" tabindex="0" aria-labelledby="docs-label">
+              Drag files here or click to upload
+              <div style="margin-top: 0.5rem; font-size: 0.75rem">UI preview only — no files are stored.</div>
+            </div>
+          </div>
+          <div class="field">
+            <label for="password">Password</label>
+            <input
+              class="input input--pill"
+              type="password"
+              id="password"
+              name="password"
+              required
+              minlength="8"
+              autocomplete="new-password"
+            />
+          </div>
+          <div class="field">
+            <label for="password2">Confirm password</label>
+            <input
+              class="input input--pill"
+              type="password"
+              id="password2"
+              name="password2"
+              required
+              minlength="8"
+              autocomplete="new-password"
+            />
+          </div>
+          <button type="submit" class="btn btn--primary btn--block btn--lg">Register as Provider</button>
+        </form>
+
+        <p class="auth-footer-text">
+          Already registered?
+          <a href="signin.html">Sign in</a>
+        </p>
+      </div>
+    </main>
+
+    <footer class="site-footer" style="margin-top: 0">
+      <div class="container footer-bar" style="border-top: none; padding-top: 0">
+        <span>© 2026 Architectural Concierge</span>
+        <a href="../customer/index.html">Customer site</a>
+      </div>
+    </footer>
+    <script src="../assets/js/config.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../assets/js/supabase-init.js"></script>
+    <script src="../assets/js/auth-provider.js"></script>
+  </body>
+</html>

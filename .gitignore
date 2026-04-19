@@ -1,0 +1,5 @@
+# Local Supabase keys (never commit real keys)
+assets/js/config.js
+
+.DS_Store
+supabase/.temp/

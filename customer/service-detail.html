@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Service details — HomeEase</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assets/css/global.css" />
+  </head>
+  <body class="page-browse" data-browse-page="service">
+    <header class="site-header site-header--browse">
+      <div class="container site-header__inner">
+        <a class="brand brand--homeease" href="index.html">HomeEase</a>
+        <nav class="browse-header-nav" aria-label="Browse">
+          <a href="categories.html">Categories</a>
+          <a href="index.html">Home</a>
+        </nav>
+        <div class="header-actions">
+          <a class="btn btn--ghost btn--signin-browse" href="signin.html">Sign In</a>
+          <a class="btn btn--primary btn--browse-cta" href="signup.html">Get Started</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="browse-main">
+      <div class="container">
+        <nav class="breadcrumb" aria-label="Breadcrumb" id="svcBreadcrumb">
+          <a href="index.html">Home</a>
+          <span class="breadcrumb__sep" aria-hidden="true">/</span>
+          <a href="categories.html">Categories</a>
+          <span class="breadcrumb__sep" aria-hidden="true">/</span>
+          <a href="category.html?c=electrical" id="svcBreadcrumbCatLink"
+            ><span id="svcBreadcrumbCat">Category</span></a
+          >
+          <span class="breadcrumb__sep" aria-hidden="true">/</span>
+          <span class="breadcrumb__current" id="svcBreadcrumbService">Service</span>
+        </nav>
+
+        <div class="service-detail-layout">
+          <div class="service-detail-main">
+            <div class="service-detail-hero" id="svcHero" role="img" aria-label="Service photo"></div>
+
+            <div class="service-detail-head">
+              <span class="badge badge--verified service-detail-badge">HomeEase verified category</span>
+              <h1 class="service-detail-title" id="svcTitle">Service</h1>
+              <p class="service-detail-summary" id="svcSummary"></p>
+              <ul class="service-detail-meta">
+                <li>
+                  <strong>Typical duration</strong>
+                  <span id="svcDuration">—</span>
+                </li>
+                <li>
+                  <strong>Starting at</strong>
+                  <span id="svcPriceDisplay">—</span>
+                </li>
+              </ul>
+            </div>
+
+            <section class="service-detail-section">
+              <h2 class="service-detail-section__title">What’s included</h2>
+              <ul class="service-detail-list" id="svcIncludes"></ul>
+            </section>
+
+            <section class="service-detail-section">
+              <h2 class="service-detail-section__title">Common add-ons</h2>
+              <ul class="service-detail-list service-detail-list--muted" id="svcAddons"></ul>
+            </section>
+
+            <section class="service-detail-section">
+              <h2 class="service-detail-section__title">HomeEase guarantee</h2>
+              <p class="service-detail-note" id="svcWarranty"></p>
+            </section>
+
+            <section class="service-detail-section service-detail-section--pro">
+              <h2 class="service-detail-section__title">Who arrives at your home</h2>
+              <p class="service-detail-note">
+                Pros are licensed or certified where required, background-checked, and rated by other homeowners on
+                HomeEase. You’ll see their profile, photo, and past reviews before you confirm.
+              </p>
+            </section>
+          </div>
+
+          <aside class="booking-card" aria-label="Book this service">
+            <div class="booking-card__head">
+              <h2 class="booking-card__title">Book this service</h2>
+              <p class="booking-card__sub">Choose a date and arrival window. Pay securely after you confirm.</p>
+            </div>
+
+            <form class="booking-form" data-booking-form action="signup.html" method="get">
+              <input type="hidden" id="bookingServiceId" value="" />
+              <input type="hidden" name="service" id="bookingServiceSlug" value="" />
+              <input type="hidden" id="bookingPriceBase" value="0" />
+              <input type="hidden" id="bookingFee" value="0" />
+              <input type="hidden" id="bookingDate" name="date" value="" />
+              <input type="hidden" id="bookingTime" name="time" value="" />
+
+              <div class="booking-field">
+                <label class="booking-label">Select date</label>
+                <p class="booking-hint">Next 14 days · tap a day</p>
+                <div class="booking-days" data-booking-days></div>
+                <label class="sr-only" for="bookingDateFallback">Or pick from calendar</label>
+                <input type="date" class="input booking-date-fallback" id="bookingDateFallback" />
+              </div>
+
+              <div class="booking-field">
+                <label class="booking-label">Preferred arrival time</label>
+                <div class="booking-slots" data-booking-times></div>
+              </div>
+
+              <div class="booking-field">
+                <label class="booking-label" for="bookingDuration">Visit length</label>
+                <select class="select select--pill" id="bookingDuration" name="duration">
+                  <option>Standard (as listed)</option>
+                  <option>Rush — same-day if available (+$49)</option>
+                  <option>Extended — extra hour buffer (+$65)</option>
+                </select>
+              </div>
+
+              <div class="booking-field">
+                <label class="booking-label" for="bookingAddress">Service address</label>
+                <input
+                  class="input input--pill"
+                  type="text"
+                  id="bookingAddress"
+                  name="address"
+                  placeholder="Street, unit, city, ZIP"
+                  autocomplete="street-address"
+                />
+              </div>
+
+              <div class="booking-field">
+                <label class="booking-label" for="bookingNotes">Notes for your pro</label>
+                <textarea
+                  class="textarea booking-textarea"
+                  id="bookingNotes"
+                  name="notes"
+                  rows="3"
+                  placeholder="Gate codes, pets, parking, materials you already have…"
+                ></textarea>
+              </div>
+
+              <div class="booking-summary">
+                <div class="booking-summary__row">
+                  <span>Service estimate</span>
+                  <strong id="svcPriceLine">—</strong>
+                </div>
+                <div class="booking-summary__row">
+                  <span>HomeEase booking fee</span>
+                  <strong id="svcFeeLine">—</strong>
+                </div>
+                <div class="booking-summary__row booking-summary__row--total">
+                  <span>Due to reserve</span>
+                  <strong id="svcTotalLine">—</strong>
+                </div>
+                <p class="booking-summary__fineprint">
+                  Final price confirmed on site if scope changes. Cancel or reschedule up to 24h before for full credit.
+                </p>
+              </div>
+
+              <button type="submit" class="btn btn--primary btn--block btn--lg booking-submit">
+                Continue to book
+              </button>
+              <p class="booking-trust">Secure checkout · insured pros on HomeEase</p>
+            </form>
+          </aside>
+        </div>
+      </div>
+    </main>
+
+    <footer class="site-footer site-footer--browse">
+      <div class="container footer-bar" style="border-top: none; padding: 1.5rem 0">
+        <span>© 2026 HomeEase</span>
+        <a href="categories.html">All categories</a>
+      </div>
+    </footer>
+    <script src="../assets/js/config.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../assets/js/supabase-init.js"></script>
+    <script src="../assets/js/booking-supabase.js"></script>
+    <script src="../assets/js/browse-supabase.js"></script>
+    <script src="../assets/js/browse.js"></script>
+  </body>
+</html>

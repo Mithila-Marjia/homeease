@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Sign In — ServicePro</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assets/css/global.css" />
+  </head>
+  <body class="auth-page theme-admin-auth">
+    <main class="auth-main">
+      <div class="card auth-card">
+        <div class="auth-logo">
+          <a class="brand" href="../customer/index.html">
+            <span class="brand__mark" style="background: linear-gradient(135deg, #312e81, #1e3a8a)">SP</span>
+            ServicePro Admin
+          </a>
+        </div>
+        <h1 class="auth-title">Administrator access</h1>
+        <p class="auth-sub">Restricted environment. All sessions are audited.</p>
+
+        <p class="auth-footer-text" data-auth-error hidden style="color: #b91c1c; margin-bottom: 0.75rem"></p>
+
+        <form action="#" method="post" data-auth-signin-admin>
+          <div class="field">
+            <label for="email">Admin email</label>
+            <input
+              class="input input--pill"
+              type="email"
+              id="email"
+              name="email"
+              placeholder="admin@servicepro.internal"
+              required
+              autocomplete="username"
+            />
+          </div>
+          <div class="field">
+            <label for="password">Password</label>
+            <input
+              class="input input--pill"
+              type="password"
+              id="password"
+              name="password"
+              placeholder="••••••••••••"
+              required
+              minlength="8"
+              autocomplete="current-password"
+            />
+          </div>
+          <div class="auth-links">
+            <span style="color: #64748b; font-size: 0.8125rem">MFA required in production</span>
+            <a href="#">Recovery key</a>
+          </div>
+          <button type="submit" class="btn btn--primary btn--block btn--lg">Sign In Securely</button>
+        </form>
+
+        <p class="auth-footer-text">
+          Not an administrator?
+          <a href="../customer/index.html">Return to marketplace</a>
+        </p>
+      </div>
+    </main>
+    <script src="../assets/js/config.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../assets/js/supabase-init.js"></script>
+    <script src="../assets/js/auth-admin.js"></script>
+  </body>
+</html>
