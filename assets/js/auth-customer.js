@@ -121,7 +121,22 @@
     window.location.href = redirect;
   }
 
+  function wireAuthPageCrossLinks() {
+    var redirect = new URLSearchParams(window.location.search).get("redirect");
+    if (!redirect) return;
+    var enc = encodeURIComponent(redirect);
+    var su = qs('a[href="signup.html"]');
+    if (su && su.getAttribute("href") === "signup.html") {
+      su.setAttribute("href", "signup.html?redirect=" + enc);
+    }
+    var si = qs('a[href="signin.html"]');
+    if (si && si.getAttribute("href") === "signin.html") {
+      si.setAttribute("href", "signin.html?redirect=" + enc);
+    }
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
+    wireAuthPageCrossLinks();
     var signupForm = qs("[data-auth-signup-customer]");
     var signinForm = qs("[data-auth-signin-customer]");
     if (signupForm) signupForm.addEventListener("submit", onSignupSubmit);

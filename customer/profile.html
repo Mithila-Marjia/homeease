@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Services — HomeEase</title>
+    <title>My profile — HomeEase</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -12,14 +12,10 @@
     />
     <link rel="stylesheet" href="../assets/css/global.css" />
   </head>
-  <body class="page-browse" data-browse-page="category" data-marketplace="remote">
+  <body class="page-browse" data-customer-account="profile">
     <header class="site-header site-header--browse">
       <div class="container site-header__inner">
         <a class="brand brand--homeease" href="index.html">HomeEase</a>
-        <div class="customer-area-inline customer-area-inline--browse">
-          <label class="sr-only" for="customerAreaCategory">Service area</label>
-          <select id="customerAreaCategory" data-customer-area-select class="deliver-select deliver-select--browse" aria-label="Service area"></select>
-        </div>
         <nav class="browse-header-nav" aria-label="Browse">
           <a href="categories.html">Categories</a>
           <a href="bookings.html">Bookings</a>
@@ -41,36 +37,57 @@
     </header>
 
     <main class="browse-main">
-      <div class="container">
+      <div class="container" style="max-width: 560px">
         <nav class="breadcrumb" aria-label="Breadcrumb">
           <a href="index.html">Home</a>
           <span class="breadcrumb__sep" aria-hidden="true">/</span>
-          <a href="categories.html">Categories</a>
-          <span class="breadcrumb__sep" aria-hidden="true">/</span>
-          <span class="breadcrumb__current" id="browseBreadcrumbCurrent">Services</span>
+          <span class="breadcrumb__current">Profile</span>
         </nav>
 
-        <header class="browse-page-header">
-          <h1 class="browse-page-header__title" id="browseCategoryTitle">Loading…</h1>
-          <p class="browse-page-header__lead" id="browseCategoryLead"></p>
-        </header>
+        <p data-customer-account-loading style="color: var(--color-text-muted); margin: 1rem 0">Loading…</p>
 
-        <div class="services-grid" id="browseServiceGrid"></div>
+        <div data-customer-account-content hidden>
+          <header class="browse-page-header" style="margin-bottom: 1.25rem">
+            <h1 class="browse-page-header__title">Your profile</h1>
+            <p class="browse-page-header__lead">Update how we reach you for bookings and reminders.</p>
+          </header>
+
+          <section class="card panel">
+            <p data-customer-profile-error hidden style="color: #b91c1c; margin: 0 0 0.75rem; font-size: 0.875rem"></p>
+            <p data-customer-profile-success hidden style="color: var(--color-accent); margin: 0 0 0.75rem; font-size: 0.875rem"></p>
+
+            <form data-customer-profile-form class="field-grid" style="display: grid; gap: 0.75rem">
+              <div class="field" style="margin: 0">
+                <label for="profileFullName">Full name</label>
+                <input class="input input--pill" id="profileFullName" type="text" required autocomplete="name" />
+              </div>
+              <div class="field" style="margin: 0">
+                <label for="profilePhone">Phone</label>
+                <input class="input input--pill" id="profilePhone" type="tel" autocomplete="tel" placeholder="e.g. 01712-345678" />
+              </div>
+              <div class="field" style="margin: 0">
+                <span class="text-muted" style="font-size: 0.8125rem">Email</span>
+                <p id="profileEmail" style="margin: 0.35rem 0 0; font-weight: 500">—</p>
+                <span class="text-muted" style="font-size: 0.75rem">Email is managed through your sign-in provider.</span>
+              </div>
+              <button type="submit" class="btn btn--primary" style="justify-self: start">Save changes</button>
+            </form>
+          </section>
+        </div>
       </div>
     </main>
 
     <footer class="site-footer site-footer--browse">
       <div class="container footer-bar" style="border-top: none; padding: 1.5rem 0">
         <span>© 2026 HomeEase</span>
-        <a href="categories.html">All categories</a>
+        <a href="index.html">Home</a>
       </div>
     </footer>
     <script src="../assets/js/config.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="../assets/js/supabase-init.js"></script>
     <script src="../assets/js/money-bdt.js"></script>
-    <script src="../assets/js/browse-supabase.js"></script>
     <script src="../assets/js/customer-site.js"></script>
-    <script src="../assets/js/browse.js"></script>
+    <script src="../assets/js/customer-account.js"></script>
   </body>
 </html>

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Services — HomeEase</title>
+    <title>My bookings — HomeEase</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -12,17 +12,13 @@
     />
     <link rel="stylesheet" href="../assets/css/global.css" />
   </head>
-  <body class="page-browse" data-browse-page="category" data-marketplace="remote">
+  <body class="page-browse" data-customer-account="bookings">
     <header class="site-header site-header--browse">
       <div class="container site-header__inner">
         <a class="brand brand--homeease" href="index.html">HomeEase</a>
-        <div class="customer-area-inline customer-area-inline--browse">
-          <label class="sr-only" for="customerAreaCategory">Service area</label>
-          <select id="customerAreaCategory" data-customer-area-select class="deliver-select deliver-select--browse" aria-label="Service area"></select>
-        </div>
         <nav class="browse-header-nav" aria-label="Browse">
           <a href="categories.html">Categories</a>
-          <a href="bookings.html">Bookings</a>
+          <a href="bookings.html" aria-current="page">Bookings</a>
           <a href="index.html">Home</a>
         </nav>
         <div class="header-actions">
@@ -45,32 +41,37 @@
         <nav class="breadcrumb" aria-label="Breadcrumb">
           <a href="index.html">Home</a>
           <span class="breadcrumb__sep" aria-hidden="true">/</span>
-          <a href="categories.html">Categories</a>
-          <span class="breadcrumb__sep" aria-hidden="true">/</span>
-          <span class="breadcrumb__current" id="browseBreadcrumbCurrent">Services</span>
+          <span class="breadcrumb__current">Bookings</span>
         </nav>
 
         <header class="browse-page-header">
-          <h1 class="browse-page-header__title" id="browseCategoryTitle">Loading…</h1>
-          <p class="browse-page-header__lead" id="browseCategoryLead"></p>
+          <h1 class="browse-page-header__title">My bookings</h1>
+          <p class="browse-page-header__lead">Every job you’ve scheduled through HomeEase.</p>
         </header>
 
-        <div class="services-grid" id="browseServiceGrid"></div>
+        <p data-customer-account-loading style="color: var(--color-text-muted)">Loading…</p>
+        <p data-customer-bookings-error hidden style="color: #b91c1c; margin: 0 0 1rem"></p>
+
+        <div data-customer-account-content hidden>
+          <p data-customer-bookings-empty hidden style="color: var(--color-text-muted); margin: 0">
+            You don’t have any bookings yet. Browse categories to book a service.
+          </p>
+          <div class="booking-list-grid" data-customer-bookings-grid hidden></div>
+        </div>
       </div>
     </main>
 
     <footer class="site-footer site-footer--browse">
       <div class="container footer-bar" style="border-top: none; padding: 1.5rem 0">
         <span>© 2026 HomeEase</span>
-        <a href="categories.html">All categories</a>
+        <a href="categories.html">Browse services</a>
       </div>
     </footer>
     <script src="../assets/js/config.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="../assets/js/supabase-init.js"></script>
     <script src="../assets/js/money-bdt.js"></script>
-    <script src="../assets/js/browse-supabase.js"></script>
     <script src="../assets/js/customer-site.js"></script>
-    <script src="../assets/js/browse.js"></script>
+    <script src="../assets/js/customer-account.js"></script>
   </body>
 </html>

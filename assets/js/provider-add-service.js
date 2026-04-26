@@ -55,7 +55,6 @@
       var slug = slugify(slugInput || title);
       var catId = catSelect && catSelect.value;
       var price = parseFloat((qs("#svcPrice") && qs("#svcPrice").value) || "0", 10);
-      var fee = parseFloat((qs("#svcFee") && qs("#svcFee").value) || "0", 10);
       var duration = (qs("#svcDuration") && qs("#svcDuration").value) || "";
       var desc = (qs("#svcDesc") && qs("#svcDesc").value) || "";
 
@@ -74,7 +73,7 @@
         slug: slug,
         description: desc.trim() || null,
         price_cents: Math.round(price * 100),
-        fee_cents: Math.round(fee * 100),
+        fee_cents: 0,
         duration_text: duration.trim() || null,
         is_active: true,
       };

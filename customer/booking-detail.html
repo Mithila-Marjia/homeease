@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Booking details — HomeEase</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assets/css/global.css" />
+  </head>
+  <body class="page-browse" data-customer-account="booking-detail">
+    <header class="site-header site-header--browse">
+      <div class="container site-header__inner">
+        <a class="brand brand--homeease" href="index.html">HomeEase</a>
+        <nav class="browse-header-nav" aria-label="Browse">
+          <a href="categories.html">Categories</a>
+          <a href="bookings.html">Bookings</a>
+          <a href="index.html">Home</a>
+        </nav>
+        <div class="header-actions">
+          <div data-customer-auth-guest style="display: flex; align-items: center; gap: 0.65rem; flex-wrap: wrap">
+            <a class="btn btn--ghost btn--signin-browse" href="signin.html">Sign In</a>
+            <a class="btn btn--primary btn--browse-cta" href="signup.html">Get Started</a>
+          </div>
+          <div data-customer-auth-user hidden style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap">
+            <a href="profile.html" class="btn btn--ghost btn--sm">Profile</a>
+            <a href="bookings.html" class="btn btn--ghost btn--sm">Bookings</a>
+            <span data-customer-greeting style="font-size: 0.875rem; color: var(--color-text-muted)"></span>
+            <button type="button" class="btn btn--ghost btn--sm" data-customer-signout>Sign out</button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="browse-main">
+      <div class="container">
+        <nav class="breadcrumb" aria-label="Breadcrumb" id="bookingBreadcrumb">
+          <a href="index.html">Home</a>
+          <span class="breadcrumb__sep" aria-hidden="true">/</span>
+          <a href="bookings.html">Bookings</a>
+          <span class="breadcrumb__sep" aria-hidden="true">/</span>
+          <span class="breadcrumb__current" id="bookingBreadcrumbCurrent">Details</span>
+        </nav>
+
+        <p data-customer-account-loading style="color: var(--color-text-muted)">Loading…</p>
+        <p data-customer-booking-error hidden style="color: #b91c1c; margin: 0 0 1rem"></p>
+
+        <div data-customer-account-content hidden>
+          <div data-customer-booking-detail hidden class="service-detail-layout booking-detail-page">
+            <div class="service-detail-main">
+              <div
+                class="service-detail-hero booking-detail-hero"
+                id="bookingDetailHero"
+                role="img"
+                aria-label="Service photo"
+              ></div>
+
+              <div class="service-detail-head">
+                <span class="badge service-detail-badge booking-detail-status-badge" id="bookingDetailStatusBadge"
+                  >—</span
+                >
+                <h1 class="service-detail-title" id="bookingDetailTitle">Booking</h1>
+                <p class="service-detail-summary" id="bookingDetailSummary"></p>
+                <ul class="service-detail-meta">
+                  <li>
+                    <strong>Scheduled</strong>
+                    <span id="bookingDetailWhen">—</span>
+                  </li>
+                  <li>
+                    <strong>Total</strong>
+                    <span id="bookingDetailTotal">—</span>
+                  </li>
+                  <li>
+                    <strong>Booking status</strong>
+                    <span id="bookingDetailStatusText">—</span>
+                  </li>
+                </ul>
+              </div>
+
+              <section class="service-detail-section">
+                <h2 class="service-detail-section__title">Visit details</h2>
+                <div class="booking-detail-kv">
+                  <div class="booking-detail-kv__row">
+                    <span class="booking-detail-kv__label">Service address</span>
+                    <p class="booking-detail-kv__value" id="bookingDetailAddress">—</p>
+                  </div>
+                  <div class="booking-detail-kv__row">
+                    <span class="booking-detail-kv__label">Your notes</span>
+                    <p class="booking-detail-kv__value" id="bookingDetailNotes">—</p>
+                  </div>
+                </div>
+              </section>
+
+              <section class="service-detail-section">
+                <h2 class="service-detail-section__title">Booking record</h2>
+                <p class="service-detail-note" id="bookingDetailCreatedLine"></p>
+              </section>
+
+              <section class="service-detail-section service-detail-section--pro">
+                <h2 class="service-detail-section__title">Need to change something?</h2>
+                <p class="service-detail-note">
+                  Contact your provider through HomeEase support if you need to reschedule or update this visit. Keep your
+                  booking reference handy.
+                </p>
+              </section>
+            </div>
+
+            <aside class="booking-card booking-detail-aside" aria-label="Provider and actions">
+              <div class="booking-card__head">
+                <h2 class="booking-card__title">Your pro</h2>
+                <p class="booking-card__sub">The provider assigned to this booking.</p>
+              </div>
+              <div class="booking-detail-provider" id="bookingDetailProviderBlock">
+                <img
+                  class="booking-detail-provider__avatar"
+                  id="bookingDetailProviderAvatar"
+                  src="../assets/images/avatar-1.svg"
+                  width="64"
+                  height="64"
+                  alt=""
+                />
+                <div>
+                  <p class="booking-detail-provider__name" id="bookingDetailProvider">—</p>
+                  <p class="booking-detail-provider__phone" id="bookingDetailProviderPhone">—</p>
+                </div>
+              </div>
+              <div class="booking-detail-aside-actions">
+                <a class="btn btn--primary btn--block btn--lg" id="bookingDetailServiceLink" href="#">View service listing</a>
+                <a class="btn btn--outline btn--block" href="bookings.html">All bookings</a>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="site-footer site-footer--browse">
+      <div class="container footer-bar" style="border-top: none; padding: 1.5rem 0">
+        <span>© 2026 HomeEase</span>
+        <a href="index.html">Home</a>
+      </div>
+    </footer>
+    <script src="../assets/js/config.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../assets/js/supabase-init.js"></script>
+    <script src="../assets/js/money-bdt.js"></script>
+    <script src="../assets/js/customer-site.js"></script>
+    <script src="../assets/js/customer-account.js"></script>
+  </body>
+</html>

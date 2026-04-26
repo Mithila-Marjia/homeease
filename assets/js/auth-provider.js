@@ -300,6 +300,42 @@
     return { error: null, uploaded: uploaded };
   }
 
+  async function loadCoverageAreasForSignup() {
+    var sb = window.homeEaseSupabase && window.homeEaseSupabase();
+    var sel = qs("#coverageArea");
+    if (!sb || !sel) return;
+    var res = await sb
+      .from("coverage_areas")
+      .select("id, slug, name, sort_order")
+      .order("sort_order", { ascending: true });
+    sel.innerHTML = "";
+    if (res.error) {
+      var o = document.createElement("option");
+      o.value = "";
+      o.textContent = "Could not load areas";
+      sel.appendChild(o);
+      return;
+    }
+    var rows = res.data || [];
+    if (!rows.length) {
+      var empty = document.createElement("option");
+      empty.value = "";
+      empty.textContent = "No areas configured yet";
+      sel.appendChild(empty);
+      return;
+    }
+    var placeholder = document.createElement("option");
+    placeholder.value = "";
+    placeholder.textContent = "Select your area";
+    sel.appendChild(placeholder);
+    rows.forEach(function (a) {
+      var opt = document.createElement("option");
+      opt.value = a.slug;
+      opt.textContent = a.name;
+      sel.appendChild(opt);
+    });
+  }
+
   async function onSignupSubmit(e) {
     e.preventDefault();
     var sb = window.homeEaseSupabase && window.homeEaseSupabase();
@@ -347,11 +383,19 @@
       return;
     }
 
+    var areaSel = qs("#coverageArea");
+    var areaSlug = areaSel && areaSel.value ? String(areaSel.value).trim() : "";
+    if (!areaSlug) {
+      showError(errEl, "Please select a coverage area.");
+      return;
+    }
+
     var meta = {
       full_name: name.trim(),
       phone: phone.trim(),
       role: "provider",
       experience_years: exp ? String(parseInt(exp, 10)) : "",
+      coverage_area_slug: areaSlug,
     };
 
     var res = await sb.auth.signUp({
@@ -462,7 +506,10 @@
 
     var signupForm = qs("[data-auth-signup-provider]");
     var signinForm = qs("[data-auth-signin-provider]");
-    if (signupForm) signupForm.addEventListener("submit", onSignupSubmit);
+    if (signupForm) {
+      loadCoverageAreasForSignup();
+      signupForm.addEventListener("submit", onSignupSubmit);
+    }
     if (signinForm) signinForm.addEventListener("submit", onSigninSubmit);
   });
 })();

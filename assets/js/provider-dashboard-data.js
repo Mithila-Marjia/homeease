@@ -29,7 +29,7 @@
 
       var res = await sb
         .from("services")
-        .select("id, title, slug, price_cents, fee_cents, is_active, image_url, categories ( name )")
+        .select("id, title, slug, price_cents, is_active, image_url, categories ( name )")
         .eq("provider_id", uid)
         .order("created_at", { ascending: false });
 

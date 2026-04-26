@@ -66,7 +66,6 @@
     var serviceEditDesc = qs("#serviceEditDesc");
     var serviceEditDuration = qs("#serviceEditDuration");
     var serviceEditPriceTaka = qs("#serviceEditPriceTaka");
-    var serviceEditFeeTaka = qs("#serviceEditFeeTaka");
     var serviceEditImageUrl = qs("#serviceEditImageUrl");
     var serviceEditActive = qs("#serviceEditActive");
 
@@ -105,7 +104,7 @@
       var res = await sb
         .from("services")
         .select(
-          "id, title, slug, is_active, price_cents, fee_cents, image_url, provider_id, category_id, description, duration_text, categories ( name )"
+          "id, title, slug, is_active, price_cents, image_url, provider_id, category_id, description, duration_text, categories ( name )"
         )
         .order("created_at", { ascending: false })
         .limit(500);
@@ -115,13 +114,13 @@
 
       if (res.error) {
         tbody.innerHTML =
-          '<tr><td colspan="8">' + A.escapeHtml(res.error.message) + "</td></tr>";
+          '<tr><td colspan="7">' + A.escapeHtml(res.error.message) + "</td></tr>";
         return;
       }
 
       if (!serviceList.length) {
         tbody.innerHTML =
-          '<tr><td colspan="8" style="color:var(--color-text-muted)">No services yet.</td></tr>';
+          '<tr><td colspan="7" style="color:var(--color-text-muted)">No services yet.</td></tr>';
         return;
       }
 
@@ -162,8 +161,6 @@
           A.escapeHtml(catName) +
           "</td><td>" +
           A.moneyCents(s.price_cents) +
-          "</td><td>" +
-          A.moneyCents(s.fee_cents) +
           '</td><td><span class="badge ' +
           (s.is_active ? "badge--verified" : "badge--pending") +
           '">' +
@@ -210,9 +207,6 @@
         var priceCents = takaToCents(
           serviceEditPriceTaka && serviceEditPriceTaka.value
         );
-        var feeCents = takaToCents(
-          serviceEditFeeTaka && serviceEditFeeTaka.value
-        );
         var imageUrl = (serviceEditImageUrl && serviceEditImageUrl.value) || "";
         var isActive = serviceEditActive && serviceEditActive.checked;
 
@@ -225,9 +219,9 @@
           return;
         }
 
-        if (priceCents == null || feeCents == null) {
+        if (priceCents == null) {
           if (editErr) {
-            editErr.textContent = "Enter valid whole-taka amounts for price and fee.";
+            editErr.textContent = "Enter a valid whole-taka amount for price.";
             editErr.hidden = false;
           }
           return;
@@ -243,7 +237,7 @@
             description: desc.trim() || null,
             duration_text: durationText.trim() || null,
             price_cents: priceCents,
-            fee_cents: feeCents,
+            fee_cents: 0,
             image_url: imageUrl.trim() || null,
             is_active: isActive,
           })
@@ -308,9 +302,6 @@
         if (serviceEditDuration) serviceEditDuration.value = s.duration_text || "";
         if (serviceEditPriceTaka) {
           serviceEditPriceTaka.value = centsToWholeTaka(s.price_cents);
-        }
-        if (serviceEditFeeTaka) {
-          serviceEditFeeTaka.value = centsToWholeTaka(s.fee_cents);
         }
         if (serviceEditImageUrl) serviceEditImageUrl.value = s.image_url || "";
         if (serviceEditActive) serviceEditActive.checked = !!s.is_active;

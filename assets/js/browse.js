@@ -539,9 +539,7 @@
     setText("#svcSummary", svc.summary);
     setText("#svcDuration", svc.duration);
     setText("#svcPriceDisplay", formatMoney(svc.price));
-    setText("#svcPriceLine", formatMoney(svc.price));
-    setText("#svcFeeLine", formatMoney(svc.fee));
-    setText("#svcTotalLine", formatMoney(svc.price + svc.fee));
+    setText("#svcTotalLine", formatMoney(svc.price));
     setText("#svcWarranty", svc.warranty);
 
     var inc = qs("#svcIncludes");
@@ -559,7 +557,6 @@
 
     qs("#bookingServiceSlug").value = slug;
     qs("#bookingPriceBase").value = String(svc.price);
-    qs("#bookingFee").value = String(svc.fee);
 
     initBookingWidget();
   }
@@ -650,14 +647,12 @@
           window.alert("Please choose a date and time slot to continue.");
           return;
         }
-        var dur = qs("#bookingDuration", form);
         var addr = qs("#bookingAddress", form);
         var notes = qs("#bookingNotes", form);
         var payload = {
           slug: slugFromForm(),
           date: date,
           time: time,
-          duration: dur && dur.value ? dur.value : "",
           address: addr && addr.value ? addr.value : "",
           notes: notes && notes.value ? notes.value : "",
           form: form,
@@ -666,14 +661,11 @@
           window.homeEaseAfterBookingSubmit(payload);
           return;
         }
-        var params = new URLSearchParams();
-        params.set("service", payload.slug);
-        params.set("date", payload.date);
-        params.set("time", payload.time);
-        if (payload.duration) params.set("duration", payload.duration);
-        if (payload.address) params.set("address", payload.address);
-        if (payload.notes) params.set("notes", payload.notes);
-        window.location.href = "signup.html?" + params.toString();
+        var path = window.location.pathname;
+        var last = path.lastIndexOf("/");
+        var file = last >= 0 ? path.slice(last + 1) : path;
+        var ret = file + window.location.search + window.location.hash;
+        window.location.href = "signin.html?redirect=" + encodeURIComponent(ret);
       });
     }
 

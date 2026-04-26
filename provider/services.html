@@ -133,14 +133,13 @@
                     <th>Title</th>
                     <th>Category</th>
                     <th>Base price</th>
-                    <th>Booking fee</th>
                     <th>Status</th>
                     <th></th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td colspan="7" style="padding: 1rem; color: var(--color-text-muted)">Loading…</td>
+                    <td colspan="6" style="padding: 1rem; color: var(--color-text-muted)">Loading…</td>
                   </tr>
                 </tbody>
               </table>
@@ -167,15 +166,9 @@
                   <option value="">Loading categories…</option>
                 </select>
               </div>
-              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem">
-                <div class="field" style="margin: 0">
-                  <label for="svcPrice">Base price (BDT)</label>
-                  <input class="input input--pill" id="svcPrice" type="number" min="0" step="1" required value="99" />
-                </div>
-                <div class="field" style="margin: 0">
-                  <label for="svcFee">Booking fee (BDT)</label>
-                  <input class="input input--pill" id="svcFee" type="number" min="0" step="1" value="9" />
-                </div>
+              <div class="field" style="margin: 0">
+                <label for="svcPrice">Base price (BDT)</label>
+                <input class="input input--pill" id="svcPrice" type="number" min="0" step="1" required value="99" />
               </div>
               <div class="field" style="margin: 0">
                 <label for="svcImage">Service image (optional)</label>

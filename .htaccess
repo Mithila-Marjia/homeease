@@ -1,0 +1,51 @@
+# HomeEase — Apache / cPanel (public_html)
+# Upload the whole project (assets, customer, admin, provider, index.html, this file) to public_html.
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # Optional: redirect HTTP → HTTPS (uncomment after SSL is installed in cPanel)
+  # RewriteCond %{HTTPS} !=on
+  # RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+  # Optional: send site root to customer home (browser URL stays / — may break relative links in customer/*.html)
+  # Safer default: use root index.html (meta redirect) instead; leave this commented.
+  # RewriteRule ^$ customer/index.html [L]
+</IfModule>
+
+# Default index at domain root (served before folder listings)
+DirectoryIndex index.html index.htm
+
+# No directory listings
+Options -Indexes
+
+# Block common sensitive paths if present
+<IfModule mod_alias.c>
+  RedirectMatch 404 /\.git
+  RedirectMatch 404 /supabase/
+</IfModule>
+
+# Compression (usually enabled on cPanel)
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/css application/javascript application/json image/svg+xml
+</IfModule>
+
+# Cache static assets (adjust if you need instant CSS/JS updates during dev)
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType text/css "access plus 7 days"
+  ExpiresByType application/javascript "access plus 7 days"
+  ExpiresByType font/woff2 "access plus 1 year"
+</IfModule>
+
+# Security headers (requires mod_headers)
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+  Header set X-Frame-Options "SAMEORIGIN"
+</IfModule>

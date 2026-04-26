@@ -21,16 +21,14 @@
       <div class="container site-header__inner">
         <a class="brand brand--homeease" href="index.html">HomeEase</a>
 
-        <button type="button" class="deliver-pill" aria-haspopup="listbox" aria-expanded="false">
+        <div class="customer-area-inline customer-area-inline--home">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
             <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
             <circle cx="12" cy="10" r="3" />
           </svg>
-          Deliver to Area
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-            <path d="M6 9l6 6 6-6" />
-          </svg>
-        </button>
+          <label class="sr-only" for="customerAreaHome">Service area</label>
+          <select id="customerAreaHome" data-customer-area-select class="deliver-select deliver-select--home" aria-label="Service area"></select>
+        </div>
 
         <div class="header-search">
           <div class="header-search-wrap">
@@ -47,56 +45,22 @@
         </div>
 
         <div class="header-actions">
-          <a class="btn btn--ghost btn--signin" href="signin.html">Sign In</a>
-          <a class="btn btn--primary" href="signup.html">Get Started</a>
+          <div data-customer-auth-guest style="display: flex; align-items: center; gap: 0.65rem; flex-wrap: wrap">
+            <a class="btn btn--ghost btn--signin" href="signin.html">Sign In</a>
+            <a class="btn btn--primary" href="signup.html">Get Started</a>
+          </div>
+          <div data-customer-auth-user hidden style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap">
+            <a href="profile.html" class="btn btn--ghost btn--sm">Profile</a>
+            <a href="bookings.html" class="btn btn--ghost btn--sm">Bookings</a>
+            <span class="text-muted" data-customer-greeting style="font-size: 0.875rem; color: var(--color-text-muted)"></span>
+            <button type="button" class="btn btn--ghost btn--sm" data-customer-signout>Sign out</button>
+          </div>
         </div>
       </div>
 
       <nav class="cat-nav" aria-label="Service categories">
         <div class="container">
-          <ul class="cat-nav__list">
-            <li>
-              <a class="cat-nav__link" href="category.html?c=cleaning" aria-current="page">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M4 22h16M6 18v-1a2 2 0 012-2h8a2 2 0 012 2v1M10 15V9M8 9h8M9 5h6l-1 4H10L9 5z" />
-                </svg>
-                Cleaning
-              </a>
-            </li>
-            <li>
-              <a class="cat-nav__link" href="category.html?c=plumbing">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z" />
-                </svg>
-                Plumbing
-              </a>
-            </li>
-            <li>
-              <a class="cat-nav__link" href="category.html?c=electrical">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-                </svg>
-                Electrical
-              </a>
-            </li>
-            <li>
-              <a class="cat-nav__link" href="category.html?c=hvac">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
-                </svg>
-                HVAC
-              </a>
-            </li>
-            <li>
-              <a class="cat-nav__link" href="category.html?c=landscape">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M12 22c4-4 8-8 8-12a8 8 0 10-16 0c0 4 4 8 8 12z" />
-                  <circle cx="12" cy="10" r="3" />
-                </svg>
-                Landscaping
-              </a>
-            </li>
-          </ul>
+          <ul class="cat-nav__list" data-customer-cat-nav></ul>
         </div>
       </nav>
     </header>
@@ -131,8 +95,8 @@
               cleaners, and landscapers—schedule visits, compare pros, and manage bookings without the hassle.
             </p>
             <div class="hero__actions">
-              <a class="btn btn--lg btn--hero-solid" href="signup.html">Book a Home Service</a>
-              <a class="btn btn--lg btn--hero-ghost" href="categories.html">Browse Services</a>
+              <a class="btn btn--lg btn--hero-solid" href="categories.html">Browse services</a>
+              <a class="btn btn--lg btn--hero-ghost" href="signup.html">Create account</a>
             </div>
           </div>
           <div class="hero__carousel-nav" role="group" aria-label="Hero slides">
@@ -163,151 +127,20 @@
             </a>
           </div>
 
-          <div class="domain-grid">
-            <a class="domain-card card-lift" href="category.html?c=electrical">
-              <div class="domain-card__icon" aria-hidden="true">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-                </svg>
-              </div>
-              <h3 class="domain-card__title">Electrical</h3>
-              <p class="domain-card__meta">Panel upgrades, lighting, outlets, and smart-home device installs.</p>
-            </a>
-            <a class="domain-card card-lift" href="category.html?c=plumbing">
-              <div class="domain-card__icon" aria-hidden="true">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M12 2.69l5.66 5.66a8 8 0 11-11.31 0z" />
-                </svg>
-              </div>
-              <h3 class="domain-card__title">Plumbing</h3>
-              <p class="domain-card__meta">Leak repairs, drain cleaning, toilets, faucets, and water heaters.</p>
-            </a>
-            <a class="domain-card card-lift" href="category.html?c=hvac">
-              <div class="domain-card__icon" aria-hidden="true">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M14 14.76V3.5a2.5 2.5 0 00-5 0v11.26A5 5 0 105 16h14a5 5 0 00-5-5z" />
-                </svg>
-              </div>
-              <h3 class="domain-card__title">HVAC</h3>
-              <p class="domain-card__meta">AC &amp; furnace tune-ups, filter changes, duct issues, and thermostat help.</p>
-            </a>
-            <a class="domain-card domain-card--highlight card-lift" href="category.html?c=landscape">
-              <div class="domain-card__icon" aria-hidden="true">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M12 22c4-4 8-8 8-12a8 8 0 10-16 0c0 4 4 8 8 12z" />
-                </svg>
-              </div>
-              <h3 class="domain-card__title">Landscape</h3>
-              <p class="domain-card__meta">Lawn mowing, planting, mulch, irrigation checks, and yard cleanups.</p>
-            </a>
-            <a class="domain-card card-lift" href="category.html?c=cleaning">
-              <div class="domain-card__icon" aria-hidden="true">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M12 3l9 6v6a4 4 0 01-4 4H7a4 4 0 01-4-4V9l9-6z" />
-                  <path d="M9 12h6" />
-                </svg>
-              </div>
-              <h3 class="domain-card__title">Deep Cleaning</h3>
-              <p class="domain-card__meta">Move-in/out cleans, recurring housekeeping, and whole-home sanitizing.</p>
-            </a>
-          </div>
+          <div class="domain-grid" data-customer-domain-grid></div>
         </section>
 
         <section class="section section--tight">
           <div class="section__head section__head--domains">
             <div>
               <h2 class="section-title-strong">Popular Home Services</h2>
-              <p class="section-lead">High-demand jobs homeowners book most often on HomeEase.</p>
+              <p class="section-lead">
+                Top-rated listings from verified providers—or the newest services when reviews are still coming in.
+              </p>
             </div>
           </div>
 
-          <div class="featured-ops">
-            <article class="featured-hero card-lift">
-              <img
-                class="featured-hero__img"
-                src="../assets/images/featured-electrician.jpg"
-                width="900"
-                height="600"
-                alt="Technician inspecting an electrical panel"
-              />
-              <div class="featured-hero__overlay" aria-hidden="true"></div>
-              <div class="featured-hero__inner">
-                <div class="featured-hero__badges">
-                  <span class="badge badge--tier">Premium Tier</span>
-                  <span class="featured-hero__rating">
-                    <span aria-hidden="true">★</span> 4.9 (2.4k reviews)
-                  </span>
-                </div>
-                <h3 class="featured-hero__title">Electrical Panel &amp; Safety Inspection</h3>
-                <p class="featured-hero__desc">
-                  Licensed electricians check breakers, grounding, and load balance—ideal after outages or before
-                  a remodel.
-                </p>
-                <div class="featured-hero__footer">
-                  <span class="featured-hero__price">From ৳&nbsp;249</span>
-                  <a class="btn btn--reserve" href="service-detail.html?s=elec-panel">Reserve Now</a>
-                </div>
-              </div>
-            </article>
-
-            <div class="featured-ops__stack">
-              <article class="mini-ops card-lift">
-                <a class="mini-ops__media" href="service-detail.html?s=plumb-leak" aria-hidden="true" tabindex="-1">
-                  <img
-                    src="../assets/images/svc-plumbing.jpg"
-                    width="400"
-                    height="200"
-                    alt=""
-                    loading="lazy"
-                  />
-                </a>
-                <div class="mini-ops__body">
-                  <div class="mini-ops__top">
-                    <span class="mini-ops__icon mini-ops__icon--blue" aria-hidden="true">
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M12 2.69l5.66 5.66a8 8 0 11-11.31 0z" />
-                      </svg>
-                    </span>
-                    <span class="mini-ops__rating">4.8 Rating</span>
-                  </div>
-                  <h3 class="mini-ops__title">Leak &amp; Pipe Check</h3>
-                  <p class="mini-ops__desc">Spot hidden leaks, test shutoffs, and protect cabinets &amp; floors.</p>
-                  <div class="mini-ops__bottom">
-                    <span class="mini-ops__price mini-ops__price--blue">৳&nbsp;149</span>
-                    <a class="mini-ops__add" href="service-detail.html?s=plumb-leak" aria-label="Book leak check">+</a>
-                  </div>
-                </div>
-              </article>
-
-              <article class="mini-ops card-lift">
-                <a class="mini-ops__media" href="service-detail.html?s=hvac-ac" aria-hidden="true" tabindex="-1">
-                  <img
-                    src="../assets/images/svc-hvac-unit.jpg"
-                    width="400"
-                    height="200"
-                    alt=""
-                    loading="lazy"
-                  />
-                </a>
-                <div class="mini-ops__body">
-                  <div class="mini-ops__top">
-                    <span class="mini-ops__icon mini-ops__icon--amber" aria-hidden="true">
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M12 9v4M12 17h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
-                      </svg>
-                    </span>
-                    <span class="mini-ops__rating">5.0 Rating</span>
-                  </div>
-                  <h3 class="mini-ops__title">Same-Day HVAC Fix</h3>
-                  <p class="mini-ops__desc">No heat or AC? Priority dispatch for diagnostics &amp; fast repairs.</p>
-                  <div class="mini-ops__bottom">
-                    <span class="mini-ops__price mini-ops__price--amber">৳&nbsp;189</span>
-                    <a class="mini-ops__add" href="service-detail.html?s=hvac-ac" aria-label="Book HVAC repair">+</a>
-                  </div>
-                </div>
-              </article>
-            </div>
-          </div>
+          <div class="featured-ops" data-customer-popular-services></div>
         </section>
       </div>
 
@@ -315,119 +148,12 @@
         <div class="container">
           <div class="section__head section__head--domains">
             <div>
-              <h2 class="section-title-strong">Top-Rated HomeEase Pros</h2>
-              <p class="section-lead">Local tradespeople and cleaners with verified licenses, reviews, and coverage.</p>
-            </div>
-            <div class="guild-filters">
-              <button type="button" class="guild-filter-btn">Top Rated</button>
-              <button type="button" class="guild-filter-btn">Near You</button>
+              <h2 class="section-title-strong">HomeEase Pros</h2>
+              <p class="section-lead">Approved providers you can book through the marketplace—specialties and experience shown on each profile.</p>
             </div>
           </div>
 
-          <div class="guild-grid">
-            <article class="guild-card card-lift">
-              <div class="guild-card__head">
-                <img class="guild-avatar" src="../assets/images/avatar-1.svg" alt="" width="56" height="56" />
-                <div>
-                  <h3 class="guild-card__name">Marcus Thorne</h3>
-                  <p class="guild-card__role">Master Electrician</p>
-                  <p class="guild-vetted">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                      <path d="M22 11.08V12a10 10 0 11-5.93-9.14" />
-                      <path d="M22 4L12 14.01l-3-3" />
-                    </svg>
-                    Vetted Expert
-                  </p>
-                </div>
-              </div>
-              <div class="guild-stats">
-                <div class="guild-stat-row">
-                  <span>Rating</span>
-                  <span>4.98 / 5.0 (482)</span>
-                </div>
-                <div class="guild-stat-row">
-                  <span>Response Time</span>
-                  <span>&lt; 30 mins</span>
-                </div>
-              </div>
-              <hr class="guild-divider" />
-              <p class="guild-coverage-label">Service Coverage</p>
-              <div class="guild-tags">
-                <span>Downtown</span>
-                <span>West Heights</span>
-              </div>
-              <a class="btn btn--guild-secondary btn--block" href="#">View Profile</a>
-            </article>
-
-            <article class="guild-card guild-card--popular card-lift">
-              <span class="guild-popular-badge">Popular</span>
-              <div class="guild-card__head">
-                <img class="guild-avatar" src="../assets/images/avatar-2.svg" alt="" width="56" height="56" />
-                <div>
-                  <h3 class="guild-card__name">Sarah Jenkins</h3>
-                  <p class="guild-card__role">HVAC Specialist</p>
-                  <p class="guild-vetted">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                      <path d="M22 11.08V12a10 10 0 11-5.93-9.14" />
-                      <path d="M22 4L12 14.01l-3-3" />
-                    </svg>
-                    Vetted Expert
-                  </p>
-                </div>
-              </div>
-              <div class="guild-stats">
-                <div class="guild-stat-row">
-                  <span>Rating</span>
-                  <span>4.95 / 5.0 (610)</span>
-                </div>
-                <div class="guild-stat-row">
-                  <span>Response Time</span>
-                  <span>&lt; 20 mins</span>
-                </div>
-              </div>
-              <hr class="guild-divider" />
-              <p class="guild-coverage-label">Service Coverage</p>
-              <div class="guild-tags">
-                <span>Midtown</span>
-                <span>River North</span>
-              </div>
-              <a class="btn btn--guild-primary btn--block" href="#">View Profile</a>
-            </article>
-
-            <article class="guild-card card-lift">
-              <div class="guild-card__head">
-                <img class="guild-avatar" src="../assets/images/avatar-3.svg" alt="" width="56" height="56" />
-                <div>
-                  <h3 class="guild-card__name">Elena Vasquez</h3>
-                  <p class="guild-card__role">Master Plumber</p>
-                  <p class="guild-vetted">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                      <path d="M22 11.08V12a10 10 0 11-5.93-9.14" />
-                      <path d="M22 4L12 14.01l-3-3" />
-                    </svg>
-                    Vetted Expert
-                  </p>
-                </div>
-              </div>
-              <div class="guild-stats">
-                <div class="guild-stat-row">
-                  <span>Rating</span>
-                  <span>4.92 / 5.0 (355)</span>
-                </div>
-                <div class="guild-stat-row">
-                  <span>Response Time</span>
-                  <span>&lt; 25 mins</span>
-                </div>
-              </div>
-              <hr class="guild-divider" />
-              <p class="guild-coverage-label">Service Coverage</p>
-              <div class="guild-tags">
-                <span>Downtown</span>
-                <span>Harbor District</span>
-              </div>
-              <a class="btn btn--guild-secondary btn--block" href="#">View Profile</a>
-            </article>
-          </div>
+          <div class="guild-grid" data-customer-provider-grid></div>
         </div>
       </section>
 
@@ -461,15 +187,6 @@
           </div>
         </div>
         <div>
-          <h4>Service areas</h4>
-          <ul>
-            <li><a href="#">Bay Area</a></li>
-            <li><a href="#">Los Angeles</a></li>
-            <li><a href="#">New York Metro</a></li>
-            <li><a href="#">Austin</a></li>
-          </ul>
-        </div>
-        <div>
           <h4>Help center</h4>
           <ul>
             <li><a href="#">Booking policies</a></li>
@@ -491,6 +208,11 @@
         <span>Certified B Corp · <a href="tel:+8801712345678">+880 1712-345678</a></span>
       </div>
     </footer>
+    <script src="../assets/js/config.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../assets/js/supabase-init.js"></script>
+    <script src="../assets/js/money-bdt.js"></script>
+    <script src="../assets/js/customer-site.js"></script>
     <script src="../assets/js/main.js"></script>
   </body>
 </html>

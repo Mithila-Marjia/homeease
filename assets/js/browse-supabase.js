@@ -16,8 +16,39 @@
     return new URLSearchParams(window.location.search).get(name);
   }
 
+  function getCoverageAreaFilterId() {
+    if (typeof window.homeEaseGetCoverageAreaId === "function") {
+      return window.homeEaseGetCoverageAreaId() || "";
+    }
+    try {
+      return localStorage.getItem("homeease_coverage_area_id") || "";
+    } catch (e) {
+      return "";
+    }
+  }
+
   function escapeAttr(str) {
     return String(str).replace(/"/g, "&quot;");
+  }
+
+  function escapeHtml(str) {
+    return String(str)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
+  function areaNameFromServiceEmbed(svc) {
+    var pr = svc.profiles;
+    if (!pr) return "";
+    if (Array.isArray(pr)) pr = pr[0];
+    if (!pr || !pr.coverage_areas) return "";
+    var ca = pr.coverage_areas;
+    if (ca && typeof ca === "object" && !Array.isArray(ca) && ca.name) {
+      return String(ca.name).trim();
+    }
+    return "";
   }
 
   async function loadCategoryPage(sb) {
@@ -46,12 +77,34 @@
     if (crumb) crumb.textContent = cat.name + " services";
     document.title = cat.name + " services — HomeEase";
 
-    var svcRes = await sb
+    var areaId = getCoverageAreaFilterId();
+    var providerIds = null;
+    if (areaId) {
+      var pRes = await sb
+        .from("profiles")
+        .select("id")
+        .eq("role", "provider")
+        .eq("provider_status", "approved")
+        .eq("coverage_area_id", areaId);
+      if (pRes.error || !pRes.data || !pRes.data.length) {
+        grid.innerHTML =
+          '<p style="color: var(--color-text-muted)">No providers in this area yet. Choose &ldquo;All areas&rdquo; or try another area.</p>';
+        return;
+      }
+      providerIds = pRes.data.map(function (x) {
+        return x.id;
+      });
+    }
+
+    var svcQ = sb
       .from("services")
-      .select("id, title, slug, price_cents, fee_cents, image_url, tag")
+      .select("id, title, slug, price_cents, image_url, tag, profiles ( coverage_areas ( name ) )")
       .eq("category_id", cat.id)
-      .eq("is_active", true)
-      .order("created_at", { ascending: false });
+      .eq("is_active", true);
+    if (providerIds) {
+      svcQ = svcQ.in("provider_id", providerIds);
+    }
+    var svcRes = await svcQ.order("created_at", { ascending: false });
 
     if (svcRes.error || !svcRes.data || !svcRes.data.length) {
       grid.innerHTML =
@@ -70,6 +123,7 @@
         window.homeEaseMoney && window.homeEaseMoney.fromTakaAmount
           ? window.homeEaseMoney.fromTakaAmount(priceNum) + "+"
           : "৳\u00A0" + priceNum.toLocaleString("en-BD", { maximumFractionDigits: 0 }) + "+";
+      var areaName = areaNameFromServiceEmbed(svc);
       var card = document.createElement("article");
       card.className = "service-card card-lift";
       card.innerHTML =
@@ -89,6 +143,11 @@
         '">' +
         escapeAttr(svc.title) +
         "</a></h2>" +
+        (areaName
+          ? '<p class="service-card__area" style="font-size:0.8125rem;color:var(--color-text-muted);margin:0.2rem 0 0;font-weight:600">' +
+            escapeHtml(areaName) +
+            "</p>"
+          : "") +
         '<p class="service-card__desc">Book a verified HomeEase provider.</p>' +
         '<div class="service-card__foot">' +
         '<span class="service-card__price">From ' +
@@ -109,7 +168,7 @@
     var res = await sb
       .from("services")
       .select(
-        "id, title, slug, description, price_cents, fee_cents, duration_text, image_url, includes, addons, warranty, tag, categories ( slug, name )"
+        "id, title, slug, description, price_cents, duration_text, image_url, includes, addons, warranty, tag, categories ( slug, name ), profiles ( coverage_areas ( name ) )"
       )
       .eq("id", id)
       .eq("is_active", true)
@@ -145,20 +204,21 @@
     var sumEl = qs("#svcSummary");
     if (sumEl) sumEl.textContent = svc.description || "";
 
+    var areaEl = qs("#svcArea");
+    if (areaEl) {
+      var an = areaNameFromServiceEmbed(svc);
+      areaEl.textContent = an || "—";
+    }
+
     var durEl = qs("#svcDuration");
     if (durEl) durEl.textContent = svc.duration_text || "—";
 
     var price = svc.price_cents / 100;
-    var fee = svc.fee_cents / 100;
 
     var pd = qs("#svcPriceDisplay");
     if (pd) pd.textContent = money(price);
-    var pl = qs("#svcPriceLine");
-    if (pl) pl.textContent = money(price);
-    var fl = qs("#svcFeeLine");
-    if (fl) fl.textContent = money(fee);
     var tl = qs("#svcTotalLine");
-    if (tl) tl.textContent = money(price + fee);
+    if (tl) tl.textContent = money(price);
 
     var w = qs("#svcWarranty");
     if (w) w.textContent = svc.warranty || "Backed by HomeEase booking protections.";
@@ -198,8 +258,6 @@
 
     var priceBase = qs("#bookingPriceBase");
     if (priceBase) priceBase.value = String(price);
-    var feeInput = qs("#bookingFee");
-    if (feeInput) feeInput.value = String(fee);
 
     var form = qs("[data-booking-form]");
     if (form) {
@@ -234,6 +292,14 @@
       await loadCategoryPage(sb);
     } else if (page === "service") {
       await loadServiceDetail(sb);
+    }
+  });
+
+  window.addEventListener("homeease-coverage-area-change", function () {
+    var sb = window.homeEaseSupabase && window.homeEaseSupabase();
+    if (!sb) return;
+    if (document.body.getAttribute("data-browse-page") === "category") {
+      loadCategoryPage(sb);
     }
   });
 })();

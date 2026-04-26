@@ -16,13 +16,26 @@
     <header class="site-header site-header--browse">
       <div class="container site-header__inner">
         <a class="brand brand--homeease" href="index.html">HomeEase</a>
+        <div class="customer-area-inline customer-area-inline--browse">
+          <label class="sr-only" for="customerAreaService">Service area</label>
+          <select id="customerAreaService" data-customer-area-select class="deliver-select deliver-select--browse" aria-label="Service area"></select>
+        </div>
         <nav class="browse-header-nav" aria-label="Browse">
           <a href="categories.html">Categories</a>
+          <a href="bookings.html">Bookings</a>
           <a href="index.html">Home</a>
         </nav>
         <div class="header-actions">
-          <a class="btn btn--ghost btn--signin-browse" href="signin.html">Sign In</a>
-          <a class="btn btn--primary btn--browse-cta" href="signup.html">Get Started</a>
+          <div data-customer-auth-guest style="display: flex; align-items: center; gap: 0.65rem; flex-wrap: wrap">
+            <a class="btn btn--ghost btn--signin-browse" href="signin.html">Sign In</a>
+            <a class="btn btn--primary btn--browse-cta" href="signup.html">Get Started</a>
+          </div>
+          <div data-customer-auth-user hidden style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap">
+            <a href="profile.html" class="btn btn--ghost btn--sm">Profile</a>
+            <a href="bookings.html" class="btn btn--ghost btn--sm">Bookings</a>
+            <span data-customer-greeting style="font-size: 0.875rem; color: var(--color-text-muted)"></span>
+            <button type="button" class="btn btn--ghost btn--sm" data-customer-signout>Sign out</button>
+          </div>
         </div>
       </div>
     </header>
@@ -53,6 +66,10 @@
                 <li>
                   <strong>Typical duration</strong>
                   <span id="svcDuration">—</span>
+                </li>
+                <li>
+                  <strong>Service area</strong>
+                  <span id="svcArea">—</span>
                 </li>
                 <li>
                   <strong>Starting at</strong>
@@ -95,7 +112,6 @@
               <input type="hidden" id="bookingServiceId" value="" />
               <input type="hidden" name="service" id="bookingServiceSlug" value="" />
               <input type="hidden" id="bookingPriceBase" value="0" />
-              <input type="hidden" id="bookingFee" value="0" />
               <input type="hidden" id="bookingDate" name="date" value="" />
               <input type="hidden" id="bookingTime" name="time" value="" />
 
@@ -110,15 +126,6 @@
               <div class="booking-field">
                 <label class="booking-label">Preferred arrival time</label>
                 <div class="booking-slots" data-booking-times></div>
-              </div>
-
-              <div class="booking-field">
-                <label class="booking-label" for="bookingDuration">Visit length</label>
-                <select class="select select--pill" id="bookingDuration" name="duration">
-                  <option>Standard (as listed)</option>
-                  <option>Rush — same-day if available (+৳&nbsp;49)</option>
-                  <option>Extended — extra hour buffer (+৳&nbsp;65)</option>
-                </select>
               </div>
 
               <div class="booking-field">
@@ -145,16 +152,8 @@
               </div>
 
               <div class="booking-summary">
-                <div class="booking-summary__row">
-                  <span>Service estimate</span>
-                  <strong id="svcPriceLine">—</strong>
-                </div>
-                <div class="booking-summary__row">
-                  <span>HomeEase booking fee</span>
-                  <strong id="svcFeeLine">—</strong>
-                </div>
                 <div class="booking-summary__row booking-summary__row--total">
-                  <span>Due to reserve</span>
+                  <span>Estimated total</span>
                   <strong id="svcTotalLine">—</strong>
                 </div>
                 <p class="booking-summary__fineprint">
@@ -184,6 +183,7 @@
     <script src="../assets/js/money-bdt.js"></script>
     <script src="../assets/js/booking-supabase.js"></script>
     <script src="../assets/js/browse-supabase.js"></script>
+    <script src="../assets/js/customer-site.js"></script>
     <script src="../assets/js/browse.js"></script>
   </body>
 </html>

@@ -27,19 +27,19 @@
     async function load() {
       var res = await sb
         .from("services")
-        .select("id, title, slug, price_cents, fee_cents, is_active, image_url, categories ( name )")
+        .select("id, title, slug, price_cents, is_active, image_url, categories ( name )")
         .eq("provider_id", uid)
         .order("created_at", { ascending: false });
 
       tbody.innerHTML = "";
       if (res.error) {
         tbody.innerHTML =
-          '<tr><td colspan="7">' + P.escapeHtml(res.error.message) + "</td></tr>";
+          '<tr><td colspan="6">' + P.escapeHtml(res.error.message) + "</td></tr>";
         return;
       }
       if (!res.data || !res.data.length) {
         tbody.innerHTML =
-          '<tr><td colspan="7" style="color:var(--color-text-muted)">No services yet. Add one below.</td></tr>';
+          '<tr><td colspan="6" style="color:var(--color-text-muted)">No services yet. Add one below.</td></tr>';
         return;
       }
 
@@ -61,8 +61,6 @@
           P.escapeHtml(catName) +
           "</td><td>" +
           P.moneyCents(s.price_cents) +
-          "</td><td>" +
-          P.moneyCents(s.fee_cents) +
           '</td><td><span class="badge ' +
           (s.is_active ? "badge--verified" : "badge--pending") +
           '">' +

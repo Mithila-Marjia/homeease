@@ -21,15 +21,37 @@
     var idEl = qs("#bookingServiceId");
     var sb = window.homeEaseSupabase && window.homeEaseSupabase();
 
-    if (!idEl || !idEl.value || !sb) {
-      var params = new URLSearchParams();
-      params.set("service", payload.slug);
-      params.set("date", payload.date);
-      params.set("time", payload.time);
-      if (payload.duration) params.set("duration", payload.duration);
-      if (payload.address) params.set("address", payload.address);
-      if (payload.notes) params.set("notes", payload.notes);
-      window.location.href = "signup.html?" + params.toString();
+    if (!idEl || !idEl.value) {
+      if (sb) {
+        var sessionTry = await sb.auth.getSession();
+        var s = sessionTry.data && sessionTry.data.session;
+        if (s) {
+          var p = await sb.from("profiles").select("role").eq("id", s.user.id).maybeSingle();
+          if (p.data && p.data.role === "customer") {
+            window.alert(
+              "Sample listings on this page cannot be booked online. Open a service from the marketplace that has a live provider listing (use Browse categories), then book from there."
+            );
+            return;
+          }
+          window.alert("Please sign in with a customer account to book.");
+          return;
+        }
+      }
+      if (!sb) {
+        var params0 = new URLSearchParams();
+        params0.set("service", payload.slug);
+        params0.set("date", payload.date);
+        params0.set("time", payload.time);
+        if (payload.address) params0.set("address", payload.address);
+        if (payload.notes) params0.set("notes", payload.notes);
+        window.location.href = "signup.html?" + params0.toString();
+        return;
+      }
+      var path = window.location.pathname;
+      var last = path.lastIndexOf("/");
+      var file = last >= 0 ? path.slice(last + 1) : path;
+      var ret = file + window.location.search + window.location.hash;
+      window.location.href = "signin.html?redirect=" + encodeURIComponent(ret);
       return;
     }
 
@@ -52,7 +74,7 @@
 
     var svcRes = await sb
       .from("services")
-      .select("id, provider_id, price_cents, fee_cents")
+      .select("id, provider_id, price_cents")
       .eq("id", idEl.value)
       .maybeSingle();
 
@@ -62,7 +84,7 @@
     }
 
     var svc = svcRes.data;
-    var total = svc.price_cents + svc.fee_cents;
+    var total = svc.price_cents;
 
     var ins = await sb.from("bookings").insert({
       customer_id: uid,

@@ -53,7 +53,7 @@
 
     var svcRes = await sb
       .from("services")
-      .select("id, title, slug, category_id, description, price_cents, fee_cents, duration_text, image_url")
+      .select("id, title, slug, category_id, description, price_cents, duration_text, image_url")
       .eq("id", id)
       .eq("provider_id", uid)
       .maybeSingle();
@@ -71,7 +71,6 @@
     if (qs("#svcSlug")) qs("#svcSlug").value = svc.slug || "";
     if (catSelect && svc.category_id) catSelect.value = svc.category_id;
     if (qs("#svcPrice")) qs("#svcPrice").value = String((svc.price_cents || 0) / 100);
-    if (qs("#svcFee")) qs("#svcFee").value = String((svc.fee_cents || 0) / 100);
     if (qs("#svcDuration")) qs("#svcDuration").value = svc.duration_text || "";
     if (qs("#svcDesc")) qs("#svcDesc").value = svc.description || "";
 
@@ -100,7 +99,6 @@
       var slug = slugify(slugInput || title);
       var catId = catSelect && catSelect.value;
       var price = parseFloat((qs("#svcPrice") && qs("#svcPrice").value) || "0", 10);
-      var fee = parseFloat((qs("#svcFee") && qs("#svcFee").value) || "0", 10);
       var duration = (qs("#svcDuration") && qs("#svcDuration").value) || "";
       var desc = (qs("#svcDesc") && qs("#svcDesc").value) || "";
 
@@ -118,7 +116,7 @@
         slug: slug,
         description: desc.trim() || null,
         price_cents: Math.round(price * 100),
-        fee_cents: Math.round(fee * 100),
+        fee_cents: 0,
         duration_text: duration.trim() || null,
       };
 
